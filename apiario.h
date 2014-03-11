@@ -20,32 +20,32 @@ public:
     /** Modify Alveare
      *
      */
-    void Modifica();
+    tntdb::Connection Modifica(tntdb::Connection);
     /** Delete Alveare
      *
      */
-    void Elimina();
+    tntdb::Connection Elimina(tntdb::Connection);
     /** Show Alveare
      *
      */
-    void Visualizza();
+    void Visualizza(tntdb::Connection);
 protected:
 private:
 //    unsigned int ID; //!< Member variable "ID"
-    string ID; //!< Member variable "ID"
+    int ID; //!< Member variable "ID"
     string Nome; //!< Member variable "Nome"
     string Posizione; //!< Member variable "Posizione"
     /** Access ID
     * \return The current value of ID
     */
-    string GetID()
+    int GetID()
     {
         return ID;
     }
     /** Set ID
      * \param val New value to set
      */
-    void SetID(string val)
+    void SetID(int val)
     {
         ID = val;
     }

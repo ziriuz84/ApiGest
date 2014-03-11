@@ -154,7 +154,10 @@ void AmministrazioneAlveari()
     cout << endl << endl;
 }
 
-/** \brief Amministra gli apiari
+/** \brief Menu di amministrazione degli apiari
+ *
+ * \param db tntdb::Connection il database
+ * \return tntdb::Connection il database
  *
  */
 tntdb::Connection AmministrazioneApiari(tntdb::Connection db)
@@ -166,6 +169,7 @@ tntdb::Connection AmministrazioneApiari(tntdb::Connection db)
         cout << "1 - Aggiungi un apiario" << endl;
         cout << "2 - Modifica un apiario" << endl;
         cout << "3 - Elimina un apiario" << endl;
+        cout << "4 - Visualizza tutti gli alveari" << endl;
         cout << "0 - Torna al menu principale" << endl;
         cout << "Scelta -> ";
         cin >> scelta;
@@ -180,10 +184,14 @@ tntdb::Connection AmministrazioneApiari(tntdb::Connection db)
         case 3:
             WIP();
             break;
+        case 4:
+            apiario.Visualizza(db);
+            break;
         }
     }
     while(scelta !=0);
     cout << endl << endl;
+    return db;
 }
 
 /** \brief Amministra le visita

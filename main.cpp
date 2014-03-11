@@ -14,10 +14,13 @@ int main()
     int scelta;
     tntdb::Connection db=ApriDatabase();
     tntdb::Value v=db.selectValue("select count(*) from sqlite_master");
-    if(v.getUnsigned()<1){
+    if(v.getUnsigned()<1)
+    {
         std::cout << 0 << std::endl;
         db=InizializzaDB(db);
-    } else {
+    }
+    else
+    {
         std::cout << 1 << std::endl;
     }
     do
