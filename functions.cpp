@@ -79,6 +79,8 @@ tntdb::Connection InizializzaDB(tntdb::Connection db)
         db.execute("CREATE TABLE Entrate(ID INT PRIMARY KEY NOT NULL, Data INT NOT NULL, Cliente INT NOT NULL, Descrizione TEXT NOT NULL, Imponibile REAL NOT NULL, IVA REAL NOT NULL, Importo REAL NOT NULL, FOREIGN KEY(Cliente) REFERENCES Clienti(ID))");
         db.execute("CREATE TABLE Fornitori(ID INT PRIMARY KEY NOT NULL, RagioneSociale TEXT NOT NULL, Nome TEXT, Cognome TEXT, Indirizzo TEXT NOT NULL, CAP TEXT NOT NULL, Citta TEXT NOT NULL, Provincia TEXT NOT NULL, Telefono TEXT, Fax TEXT, Email TEXT, CFPIVA TEXT NOT NULL, Note TEXT)");
         db.execute("CREATE TABLE Spese(ID INT PRIMARY KEY NOT NULL, Data INT NOT NULL, Descrizione TEXT NOT NULL, Fornitore INT NOT NULL, Imponibile REAL NOT NULL, IVA REAL NOT NULL, Importo REAL NOT NULL, FOREIGN KEY(Fornitore) REFERENCES Fornitori(ID))");
+        db.execute("CREATE TABLE Versioni (ID INT PRIMARY KEY NOT NULL, Versione TEXT NOT NULL);");
+        db.execute("INSERT INTO Versioni(ID,Versione) VALUES (0,0.1);");
         db.execute("INSERT INTO Clienti(ID, Nome, Cognome, RagioneSociale, Indirizzo, CAP, Citta, Provincia, Telefono, Fax, Cellulare, Email, CFPIVA, Note) VALUES (0, 'Generico', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)");
         db.execute("INSERT INTO Nutrizioni(ID, Nutrizione) VALUES(0, 'Assente'); INSERT INTO Nutrizioni(ID, Nutrizione) VALUES(1,'Candito');INSERT INTO Nutrizioni(ID, Nutrizione) VALUES(2,'Candito con polline');INSERT INTO Nutrizioni(ID, Nutrizione) VALUES(3,'Sciroppo');INSERT INTO Nutrizioni(ID, Nutrizione) VALUES(4,'Sciroppo con Apiherb')");
         db.execute("INSERT INTO ScopiNutrizione(ID, Scopo) VALUES(0,'Emergenza');INSERT INTO ScopiNutrizione(ID, Scopo) VALUES(1,'Invernale')");
@@ -173,7 +175,7 @@ tntdb::Connection AmministrazioneApiari(tntdb::Connection db)
         cout << "1 - Aggiungi un apiario" << endl;
         cout << "2 - Modifica un apiario" << endl;
         cout << "3 - Elimina un apiario" << endl;
-        cout << "4 - Visualizza tutti gli alveari" << endl;
+        cout << "4 - Visualizza tutti gli apiari" << endl;
         cout << "0 - Torna al menu principale" << endl;
         cout << "Scelta -> ";
         cin >> scelta;
@@ -186,7 +188,7 @@ tntdb::Connection AmministrazioneApiari(tntdb::Connection db)
             WIP();
             break;
         case 3:
-            WIP();
+            db=apiario.Elimina(db);
             break;
         case 4:
             apiario.Visualizza(db);

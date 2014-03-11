@@ -29,8 +29,8 @@ Apiario::~Apiario()
  */
 tntdb::Connection Apiario::Aggiungi(tntdb::Connection db)
 {
-    tntdb::Value v=db.selectValue("select count(*) from Apiari");
-    ID=v.getUnsigned();
+    tntdb::Value v=db.selectValue("select ID from Apiari where id = (select MAX(ID) from Apiari)");
+    ID=v.getUnsigned()+1;
     cout << "Nome -> ";
     cin >> Nome;
     cout << "Posizione -> ";
@@ -48,6 +48,11 @@ tntdb::Connection Apiario::Aggiungi(tntdb::Connection db)
  */
 tntdb::Connection Apiario::Elimina(tntdb::Connection db)
 {
+    Visualizza(db);
+    cout << "Seleziona l'ID dell'apiario da eliminare" << endl << "ID -> ";
+    cin >> ID;
+    tntdb::Statement st=db.prepare("DELETE FROM Apiari WHERE ID = :v1");
+    st.setInt("v1", ID).execute();
     return db;
 }
 
