@@ -4,8 +4,6 @@
 #include <string>
 #include <tntdb/connection.h>
 
-static int callback(void *, int , char **, char **);
-tntdb::Connection EseguiQuery(tntdb::Connection,const char *);
 tntdb::Connection InizializzaDB(tntdb::Connection);
 tntdb::Connection ApriDatabase();
 void WIP();

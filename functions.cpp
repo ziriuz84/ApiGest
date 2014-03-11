@@ -9,51 +9,6 @@
 #include "apiario.h"
 using namespace std;
 
-/** \brief callback dal tutorial
- *
- * \param NotUsed void*
- * \param argc int
- * \param argv char**
- * \param azColName char**
- * \return int
- * \todo descrivere le variabili per doxygen
- */
-static int callback(void *NotUsed, int argc, char **argv, char **azColName)
-{
-//    for (int i=0; i<argc; i++)
-//    {
-//        printf("%s=%s\n", azColName[i], argv[i]?argv[i]:"NULL");
-//    }
-//    printf("\n");
-    return 0;
-}
-
-/** \brief Esegue una queru chiamando la funzione callback
- *
- * \param db sqlite3* il puntatore al database
- * \param query char* la query da eseguire
- * \return sqlite3* il puntatore al database
- * \todo passare come parametro la funzione di callback, se possibile
- */
-tntdb::Connection EseguiQuery(tntdb::Connection db,const char *query)
-{
-    //TODO passare come parametro la funzione di callback, se possibile
-//    int rc;
-//    char *zErrMsg;
-//    rc=sqlite3_exec(db, query, callback, 0, &zErrMsg);
-//    if (rc!=SQLITE_OK)
-//    {
-//        fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//        sqlite3_free(zErrMsg);
-//    }
-//    else
-//    {
-//        fprintf(stdout, "Query creata con successo\n");
-//    }
-    return db;
-}
-
-
 /** \brief Inizializza il database se è vuoto
  *
  * \param db tntdb::Connection il database
