@@ -64,6 +64,15 @@ tntdb::Connection Apiario::Elimina(tntdb::Connection db)
  */
 tntdb::Connection Apiario::Modifica(tntdb::Connection db)
 {
+    Visualizza(db);
+    cout << "Seleziona l'ID dell'apiario da modificare" << endl << "ID -> ";
+    cin >> ID;
+    cout << "Nome -> ";
+    cin >> Nome;
+    cout << "Posizione -> ";
+    cin >> Posizione;
+    tntdb::Statement st=db.prepare("update Apiari set Nome = :v1, Posizione = :v2 where id = :v3");
+    st.set("v1", Nome).set("v2", Posizione).set("v3", ID).execute();
     return db;
 }
 

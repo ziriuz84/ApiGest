@@ -185,7 +185,7 @@ tntdb::Connection AmministrazioneApiari(tntdb::Connection db)
             db=apiario.Aggiungi(db);
             break;
         case 2:
-            WIP();
+            db=apiario.Modifica(db);
             break;
         case 3:
             db=apiario.Elimina(db);
