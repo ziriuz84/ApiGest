@@ -29,8 +29,16 @@ Apiario::~Apiario()
  */
 tntdb::Connection Apiario::Aggiungi(tntdb::Connection db)
 {
-    tntdb::Value v=db.selectValue("select ID from Apiari where id = (select MAX(ID) from Apiari)");
-    ID=v.getUnsigned()+1;
+    tntdb::Value v=db.selectValue("select count(*) from Apiari");
+    if (v.getUnsigned()<1)
+    {
+        ID=0;
+    }
+    else
+    {
+        v=db.selectValue("select ID from Apiari where id = (select MAX(ID) from Apiari)");
+        ID=v.getUnsigned()+1;
+    }
     cout << "Nome -> ";
     cin >> Nome;
     cout << "Posizione -> ";
