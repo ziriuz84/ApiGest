@@ -134,6 +134,7 @@ void AmministrazioneAlveari()
         cout << "1 - Aggiungi un alveare" << endl;
         cout << "2 - Modifica un alveare" << endl;
         cout << "3 - Elimina un alveare" << endl;
+        cout << "4 - Visualizza gli alveari" << endl;
         cout << "0 - Torna al menu principale" << endl;
         cout << "Scelta -> ";
         cin >> scelta;
@@ -146,6 +147,9 @@ void AmministrazioneAlveari()
             WIP();
             break;
         case 3:
+            WIP();
+            break;
+        case 4:
             WIP();
             break;
         }
@@ -199,7 +203,32 @@ tntdb::Connection AmministrazioneApiari(tntdb::Connection db)
  */
 void AmministrazioneVisite()
 {
-    WIP();
+    int scelta;
+    do{
+        cout << "1 - Aggiungi una visita" << endl;
+        cout << "2 - Modifica una visita" << endl;
+        cout << "3 - Elimina una visita" << endl;
+        cout << "4 - Visualizza tutte le visite" << endl;
+        cout << "0 - Torna al menu principale" << endl;
+        cout << "Scelta -> ";
+        cin >> scelta;
+        switch(scelta)
+        {
+        case 1:
+            WIP();
+            break;
+        case 2:
+            WIP();
+            break;
+        case 3:
+            WIP();
+            break;
+        case 4:
+            WIP();
+            break;
+        }
+    }while(scelta!=0);
+    cout << endl << endl;
 }
 
 /** \brief Amministra gli interventi fitosanitari
@@ -207,5 +236,59 @@ void AmministrazioneVisite()
  */
 void AmministrazioneInterventi()
 {
-    WIP();
+    int scelta;
+    do{
+        cout << "1 - Aggiungi un intervento" << endl;
+        cout << "2 - Modifica un intervento" << endl;
+        cout << "3 - Elimina un intervento" << endl;
+        cout << "4 - Visualizza tutti gli interventi" << endl;
+        cout << "0 - Torna al menu principale" << endl;
+        cout << "Scelta -> ";
+        cin >> scelta;
+        switch(scelta)
+        {
+        case 1:
+            WIP();
+            break;
+        case 2:
+            WIP();
+            break;
+        case 3:
+            WIP();
+            break;
+        case 4:
+            WIP();
+            break;
+        }
+    }while(scelta!=0);
+    cout << endl << endl;
+}
+
+void AmministrazioneMagazzino(){
+        int scelta;
+    do{
+        cout << "1 - Aggiungi un materiale" << endl;
+        cout << "2 - Modifica un materiale" << endl;
+        cout << "3 - Elimina un materiale" << endl;
+        cout << "4 - Visualizza tutti i materiali" << endl;
+        cout << "0 - Torna al menu principale" << endl;
+        cout << "Scelta -> ";
+        cin >> scelta;
+        switch(scelta)
+        {
+        case 1:
+            WIP();
+            break;
+        case 2:
+            WIP();
+            break;
+        case 3:
+            WIP();
+            break;
+        case 4:
+            WIP();
+            break;
+        }
+    }while(scelta!=0);
+    cout << endl << endl;
 }

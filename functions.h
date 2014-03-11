@@ -13,4 +13,5 @@ void AmministrazioneAlveari();
 tntdb::Connection AmministrazioneApiari(tntdb::Connection);
 void AmministrazioneVisite();
 void AmministrazioneInterventi();
+void AmministrazioneMagazzino();
 #endif // FUNCTIONS_H_INCLUDED

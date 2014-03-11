@@ -30,6 +30,7 @@ int main()
         std::cout << "2 - Amministrazione Apiari"<<std::endl;
         std::cout << "3 - Amministrazione Visite"<<std::endl;
         std::cout << "4 - Amministrazione Interventi Fitosanitari"<<std::endl;
+        std::cout << "5 - Amministrazione Magazzino" << std::endl;
         std::cout << "0 - Esci"<<std::endl;
         std::cout << "Scelta -> ";
         std::cin >> scelta;
@@ -47,6 +48,9 @@ int main()
             break;
         case 4:
             AmministrazioneInterventi();
+            break;
+        case 5:
+            AmministrazioneMagazzino();
             break;
         }
     }
