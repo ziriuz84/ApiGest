@@ -17,7 +17,7 @@ public:
     /** Add Alveare
      *
      */
-    void Aggiungi();
+    tntdb::Connection Aggiungi(tntdb::Connection);
     /** Modify Alveare
      *
      */

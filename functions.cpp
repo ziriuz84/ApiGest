@@ -7,6 +7,7 @@
 #include <tntdb/statement.h>
 #include "functions.h"
 #include "apiario.h"
+#include "alveare.h"
 using namespace std;
 
 /** \brief Inizializza il database se è vuoto
@@ -83,9 +84,10 @@ void WIP()
 /** \brief Amministra gli alveari
  *
  */
-void AmministrazioneAlveari()
+tntdb::Connection AmministrazioneAlveari(tntdb::Connection db)
 {
     int scelta;
+    Alveare alveare;
     do
     {
         cout << "1 - Aggiungi un alveare" << endl;
@@ -98,7 +100,8 @@ void AmministrazioneAlveari()
         switch(scelta)
         {
         case 1:
-            WIP();
+            db=alveare.Aggiungi(db);
+            cout << 3 << endl;
             break;
         case 2:
             WIP();
@@ -113,6 +116,7 @@ void AmministrazioneAlveari()
     }
     while(scelta !=0);
     cout << endl << endl;
+    return db;
 }
 
 /** \brief Menu di amministrazione degli apiari

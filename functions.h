@@ -7,7 +7,7 @@
 tntdb::Connection InizializzaDB(tntdb::Connection);
 tntdb::Connection ApriDatabase();
 void WIP();
-void AmministrazioneAlveari();
+tntdb::Connection AmministrazioneAlveari(tntdb::Connection);
 tntdb::Connection AmministrazioneApiari(tntdb::Connection);
 void AmministrazioneVisite();
 void AmministrazioneInterventi();
