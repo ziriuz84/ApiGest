@@ -106,7 +106,7 @@ tntdb::Connection AmministrazioneAlveari(tntdb::Connection db)
             WIP();
             break;
         case 3:
-            WIP();
+            db=alveare.Elimina(db);
             break;
         case 4:
             alveare.Visualizza(db);

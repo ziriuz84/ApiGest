@@ -25,7 +25,7 @@ public:
     /** Delete Alveare
      *
      */
-    void Elimina();
+    tntdb::Connection Elimina(tntdb::Connection);
     /** Show Alveare
      *
      */

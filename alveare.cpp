@@ -121,9 +121,25 @@ tntdb::Connection Alveare::Aggiungi(tntdb::Connection db)
     return db;
 }
 
-void Alveare::Elimina()
+tntdb::Connection Alveare::Elimina(tntdb::Connection db)
 {
-    //Elimina
+    tntdb::Result result=db.select("select Alveari.ID, Alveari.Nome, Apiari.Nome from Alveari join Apiari on Apiari.id = Alveari.Apiario");
+    string apiario;
+    int id;
+    cout << "|" << setw(4) << "ID" << "|" << setw(15) << "Nome" << "|" << setw(15) << "Apiario" << "|" << endl;
+    cout << "|----|---------------|---------------|" << endl;
+    for (tntdb::Result::const_iterator it=result.begin();it!=result.end();++it){
+        tntdb::Row row=*it;
+        row[0].get(ID);
+        row[1].get(Nome);
+        row[2].get(apiario);
+        cout << "|" << setw(4) << ID << "|" << setw(15) << Nome << "|" << setw(15) << apiario << "|" << endl;
+    }
+    cout << "Seleziona l'ID dell'alveare da eliminare" << endl << "ID -> ";
+    cin >> id;
+    tntdb::Statement st=db.prepare("DELETE FROM Alveari WHERE ID = :id");
+    st.set("id", id).execute();
+    return db;
 }
 
 void Alveare::Modifica()
