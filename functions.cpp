@@ -101,7 +101,6 @@ tntdb::Connection AmministrazioneAlveari(tntdb::Connection db)
         {
         case 1:
             db=alveare.Aggiungi(db);
-            cout << 3 << endl;
             break;
         case 2:
             WIP();
@@ -110,7 +109,7 @@ tntdb::Connection AmministrazioneAlveari(tntdb::Connection db)
             WIP();
             break;
         case 4:
-            WIP();
+            alveare.Visualizza(db);
             break;
         }
     }
@@ -165,7 +164,8 @@ tntdb::Connection AmministrazioneApiari(tntdb::Connection db)
 void AmministrazioneVisite()
 {
     int scelta;
-    do{
+    do
+    {
         cout << "1 - Aggiungi una visita" << endl;
         cout << "2 - Modifica una visita" << endl;
         cout << "3 - Elimina una visita" << endl;
@@ -188,7 +188,8 @@ void AmministrazioneVisite()
             WIP();
             break;
         }
-    }while(scelta!=0);
+    }
+    while(scelta!=0);
     cout << endl << endl;
 }
 
@@ -198,7 +199,8 @@ void AmministrazioneVisite()
 void AmministrazioneInterventi()
 {
     int scelta;
-    do{
+    do
+    {
         cout << "1 - Aggiungi un intervento" << endl;
         cout << "2 - Modifica un intervento" << endl;
         cout << "3 - Elimina un intervento" << endl;
@@ -221,13 +223,16 @@ void AmministrazioneInterventi()
             WIP();
             break;
         }
-    }while(scelta!=0);
+    }
+    while(scelta!=0);
     cout << endl << endl;
 }
 
-void AmministrazioneMagazzino(){
-        int scelta;
-    do{
+void AmministrazioneMagazzino()
+{
+    int scelta;
+    do
+    {
         cout << "1 - Aggiungi un materiale" << endl;
         cout << "2 - Modifica un materiale" << endl;
         cout << "3 - Elimina un materiale" << endl;
@@ -250,6 +255,29 @@ void AmministrazioneMagazzino(){
             WIP();
             break;
         }
-    }while(scelta!=0);
+    }
+    while(scelta!=0);
     cout << endl << endl;
+}
+
+void RecuperaValore(tntdb::Connection db,string titolo, string campo, string tabella, int id)
+{
+    tntdb::Statement st=db.prepare("select :campo from :tabella where ID=:id");
+    string valore;
+    try
+    {
+        st.set("campo",campo).set("tabella",tabella).set("id", id).execute();
+    }
+    catch(const std::exception&e)
+    {
+        std::cerr<<e.what()<<std::endl;
+    }
+    for (tntdb::Statement::const_iterator it=st.begin(); it!=st.end(); ++it)
+    {
+        tntdb::Row row=*it;
+        row[0].get(valore);
+    }
+    cout << titolo << ": " << valore << endl;
+
+
 }

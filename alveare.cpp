@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include "functions.h"
 #include <tntdb/connection.h>
 #include <tntdb/value.h>
 #include <tntdb/statement.h>
@@ -55,7 +56,8 @@ tntdb::Connection Alveare::Aggiungi(tntdb::Connection db)
     tntdb::Result result=db.select("select * from Razze");
     cout << "|" << setw(4) << "ID" << "|" << setw(25) << "Razza" << "|" << endl;
     cout << "|----|---------------------------|" << endl;
-    for (tntdb::Result::const_iterator it=result.begin();it!=result.end();++it){
+    for (tntdb::Result::const_iterator it=result.begin(); it!=result.end(); ++it)
+    {
         tntdb::Row row=*it;
         string id, nome;
         row[0].get(id);
@@ -71,7 +73,8 @@ tntdb::Connection Alveare::Aggiungi(tntdb::Connection db)
     result=db.select("select * from TipiArnia");
     cout << "|" << setw(4) << "ID" << "|" << setw(15) << "Tipo arnia" << "|" << endl;
     cout << "|----|----------------|" << endl;
-    for (tntdb::Result::const_iterator it=result.begin();it!=result.end();++it){
+    for (tntdb::Result::const_iterator it=result.begin(); it!=result.end(); ++it)
+    {
         tntdb::Row row=*it;
         string id, nome;
         row[0].get(id);
@@ -84,7 +87,8 @@ tntdb::Connection Alveare::Aggiungi(tntdb::Connection db)
     result=db.select("select * from Provenienze");
     cout << "|" << setw(4) << "ID" << "|" << setw(15) << "Provenienza" << "|" << endl;
     cout << "|----|----------------|" << endl;
-    for (tntdb::Result::const_iterator it=result.begin();it!=result.end();++it){
+    for (tntdb::Result::const_iterator it=result.begin(); it!=result.end(); ++it)
+    {
         tntdb::Row row=*it;
         string id, nome;
         row[0].get(id);
@@ -100,7 +104,8 @@ tntdb::Connection Alveare::Aggiungi(tntdb::Connection db)
     result=db.select("select * from StatoFamiglia");
     cout << "|" << setw(4) << "ID" << "|" << setw(15) << "Stato Famiglia" << "|" << endl;
     cout << "|----|----------------|" << endl;
-    for (tntdb::Result::const_iterator it=result.begin();it!=result.end();++it){
+    for (tntdb::Result::const_iterator it=result.begin(); it!=result.end(); ++it)
+    {
         tntdb::Row row=*it;
         string id, nome;
         row[0].get(id);
@@ -112,9 +117,7 @@ tntdb::Connection Alveare::Aggiungi(tntdb::Connection db)
     st.set("statofamiglia", temp1);
     cout << "Indica la posizione dell'arnia nell'apiario" << endl << "Posizione -> ";
     cin >> temp1;
-    cout << 1 << endl;
     st.set("posizione", temp1).execute();
-    cout << 2 << endl;
     return db;
 }
 
@@ -128,7 +131,40 @@ void Alveare::Modifica()
     //Modifica
 }
 
-void Alveare::Visualizza()
+void Alveare::Visualizza(tntdb::Connection db)
 {
-    //Visualizza
+    tntdb::Result result=db.select("select Alveari.ID, Alveari.Nome, Apiari.Nome, Alveari.DataCreazione, Alveari.Descrizione, Razze.Nome, Alveari.Colore, TipiArnia.Nome, Provenienze.Provenienza, Alveari.AnnoRegina, StatoFamiglia.StatoFamiglia, Alveari.Posizione from Alveari join Apiari on Apiari.id=Alveari.Apiario join Razze on Razze.ID=Alveari.Razza join TipiArnia on TipiArnia.id=Alveari.TipoArnia join Provenienze on Provenienze.id = Alveari.Provenienza join StatoFamiglia on StatoFamiglia.id=Alveari.StatoFamiglia");
+    string a;
+    for (tntdb::Result::const_iterator it=result.begin(); it!=result.end(); ++it)
+    {
+        tntdb::Row row=*it;
+        string valore;
+        tntdb::Date data;
+        row[0].get(ID);
+        cout << left << setw(20) << "ID" << ": " << ID << endl;
+        row[1].get(Nome);
+        cout << setw(20) << "Nome" << ": " << Nome << endl;
+        row[2].get(valore);
+        cout << setw(20) << "Apiario" << ": " << valore << endl;
+        row[3].get(data);
+        cout << setw(20) << "Creato il" << ": " << data.getIso() << endl;
+        row[4].get(Descrizione);
+        cout << setw(20) << "Descrizione" << ": " << Descrizione << endl;
+        row[5].get(Razza);
+        cout << setw(20) << "Razza" << ": " << Razza << endl;
+        row[6].get(Colore);
+        cout << setw(20) << "Colore" << ": " << Colore << endl;
+        row[7].get(TipoArnia);
+        cout << setw(20) << "Tipo di Arnia" << ": " << TipoArnia << endl;
+        row[8].get(Provenienza);
+        cout << setw(20) << "Provenienza" << ": " << Provenienza << endl;
+        row[9].get(AnnoRegina);
+        cout << setw(20) << "Anno Regina" << ": " << AnnoRegina << endl;
+        row[10].get(StatoFamiglia);
+        cout << setw(20) << "Stato della famiglia" << ": " << StatoFamiglia << endl;
+        row[11].get(Posizione);
+        cout << setw(20) << "Posizione" << ": " << Posizione<<endl;
+        cout << "Premi un carattere qualsiasi e batti invio" << endl;
+        cin >> a;
+    }
 }

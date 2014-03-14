@@ -29,7 +29,7 @@ public:
     /** Show Alveare
      *
      */
-    void Visualizza();
+    void Visualizza(tntdb::Connection);
 protected:
 private:
     unsigned int ID; //!< Member variable "ID"

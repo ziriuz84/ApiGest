@@ -39,7 +39,6 @@ int main()
         {
         case 1:
             db=AmministrazioneAlveari(db);
-            std::cout << 4 << std::endl;
             break;
         case 2:
             db=AmministrazioneApiari(db);
@@ -56,7 +55,6 @@ int main()
         }
     }
     while (scelta!=0);
-    std::cout<<6<<std::endl;
     return 0;
 }
 
