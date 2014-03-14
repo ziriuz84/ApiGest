@@ -54,7 +54,7 @@ tntdb::Connection Alveare::Aggiungi(tntdb::Connection db)
     cin >> tempstr;
     st.set("descrizione", tempstr);
     tntdb::Result result=db.select("select * from Razze");
-    cout << "|" << setw(4) << "ID" << "|" << setw(25) << "Razza" << "|" << endl;
+    cout << "|" << setw(4) << "ID" << "|" << setw(27) << "Razza" << "|" << endl;
     cout << "|----|---------------------------|" << endl;
     for (tntdb::Result::const_iterator it=result.begin(); it!=result.end(); ++it)
     {
@@ -62,7 +62,7 @@ tntdb::Connection Alveare::Aggiungi(tntdb::Connection db)
         string id, nome;
         row[0].get(id);
         row[1].get(nome);
-        cout << "|" << setw(4) << id << "|" << setw(25) << nome << "|" << endl;
+        cout << "|" << setw(4) << id << "|" << setw(27) << nome << "|" << endl;
     }
     cout << "Seleziona la razza" << endl << "ID -> ";
     cin >> temp1;
@@ -71,7 +71,7 @@ tntdb::Connection Alveare::Aggiungi(tntdb::Connection db)
     cin >> tempstr;
     st.set("colore", tempstr);
     result=db.select("select * from TipiArnia");
-    cout << "|" << setw(4) << "ID" << "|" << setw(15) << "Tipo arnia" << "|" << endl;
+    cout << "|" << setw(4) << "ID" << "|" << setw(16) << "Tipo arnia" << "|" << endl;
     cout << "|----|----------------|" << endl;
     for (tntdb::Result::const_iterator it=result.begin(); it!=result.end(); ++it)
     {
@@ -79,21 +79,21 @@ tntdb::Connection Alveare::Aggiungi(tntdb::Connection db)
         string id, nome;
         row[0].get(id);
         row[1].get(nome);
-        cout << "|" << setw(4) << id << "|" << setw(15) << nome << "|" << endl;
+        cout << "|" << setw(4) << id << "|" << setw(16) << nome << "|" << endl;
     }
     cout << "Seleziona l'ID del tipo di arnia corretto" << endl << "ID -> ";
     cin >> temp1;
     st.set("tipoarnia", temp1);
     result=db.select("select * from Provenienze");
-    cout << "|" << setw(4) << "ID" << "|" << setw(15) << "Provenienza" << "|" << endl;
-    cout << "|----|----------------|" << endl;
+    cout << "|" << setw(4) << "ID" << "|" << setw(25) << "Provenienza" << "|" << endl;
+    cout << "|----|-------------------------|" << endl;
     for (tntdb::Result::const_iterator it=result.begin(); it!=result.end(); ++it)
     {
         tntdb::Row row=*it;
         string id, nome;
         row[0].get(id);
         row[1].get(nome);
-        cout << "|" << setw(4) << id << "|" << setw(15) << nome << "|" << endl;
+        cout << "|" << setw(4) << id << "|" << setw(25) << nome << "|" << endl;
     }
     cout << "Seleziona l'ID della provenienza corretta" << endl << "ID -> ";
     cin >> temp1;
@@ -102,7 +102,7 @@ tntdb::Connection Alveare::Aggiungi(tntdb::Connection db)
     cin >> temp1;
     st.set("annoregina", temp1);
     result=db.select("select * from StatoFamiglia");
-    cout << "|" << setw(4) << "ID" << "|" << setw(15) << "Stato Famiglia" << "|" << endl;
+    cout << "|" << setw(4) << "ID" << "|" << setw(16) << "Stato Famiglia" << "|" << endl;
     cout << "|----|----------------|" << endl;
     for (tntdb::Result::const_iterator it=result.begin(); it!=result.end(); ++it)
     {
@@ -110,7 +110,7 @@ tntdb::Connection Alveare::Aggiungi(tntdb::Connection db)
         string id, nome;
         row[0].get(id);
         row[1].get(nome);
-        cout << "|" << setw(4) << id << "|" << setw(15) << nome << "|" << endl;
+        cout << "|" << setw(4) << id << "|" << setw(16) << nome << "|" << endl;
     }
     cout << "Dai un voto allo stato della famiglia [0-4]" << endl << "Voto -> ";
     cin >> temp1;
