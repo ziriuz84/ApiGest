@@ -2,7 +2,8 @@
 #define ALVEARE_H
 #include <string>
 #include <iostream>
-#include <tntdb/connection.h>
+#include <KompexSQLiteDatabase.h>
+#include <KompexSQLiteStatement.h>
 #include "apiario.h"
 
 using namespace std;
@@ -17,19 +18,19 @@ public:
     /** Add Alveare
      *
      */
-    tntdb::Connection Aggiungi(tntdb::Connection);
+    Kompex::SQLiteDatabase *Aggiungi(Kompex::SQLiteDatabase *);
     /** Modify Alveare
      *
      */
-    void Modifica();
+    Kompex::SQLiteDatabase *Modifica(Kompex::SQLiteDatabase *);
     /** Delete Alveare
      *
      */
-    tntdb::Connection Elimina(tntdb::Connection);
+    Kompex::SQLiteDatabase *Elimina(Kompex::SQLiteDatabase *);
     /** Show Alveare
      *
      */
-    void Visualizza(tntdb::Connection);
+    void Visualizza(Kompex::SQLiteDatabase *);
 protected:
 private:
     unsigned int ID; //!< Member variable "ID"
@@ -212,6 +213,17 @@ private:
     {
         AnnoRegina = val;
     }
+    Kompex::SQLiteDatabase *SetNome(Kompex::SQLiteDatabase *, int);
+    Kompex::SQLiteDatabase *SetLocation(Kompex::SQLiteDatabase *, int);
+    Kompex::SQLiteDatabase *SetDataCreazione(Kompex::SQLiteDatabase *, int);
+    Kompex::SQLiteDatabase *SetDescrizione(Kompex::SQLiteDatabase *, int);
+    Kompex::SQLiteDatabase *SetRazza(Kompex::SQLiteDatabase *, int);
+    Kompex::SQLiteDatabase *SetColore(Kompex::SQLiteDatabase *, int);
+    Kompex::SQLiteDatabase *SetTipoArnia(Kompex::SQLiteDatabase *, int);
+    Kompex::SQLiteDatabase *SetProvenienza(Kompex::SQLiteDatabase *, int);
+    Kompex::SQLiteDatabase *SetStatoFamiglia(Kompex::SQLiteDatabase *, int);
+    Kompex::SQLiteDatabase *SetPosizione(Kompex::SQLiteDatabase *, int);
+    Kompex::SQLiteDatabase *SetAnnoRegina(Kompex::SQLiteDatabase *, int);
 };
 
 #endif // ALVEARE_H

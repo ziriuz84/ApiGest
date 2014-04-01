@@ -1,20 +1,20 @@
 #include <iostream>
 #include <string>
+#include <KompexSQLiteDatabase.h>
+#include <KompexSQLiteStatement.h>
 #include "functions.h"
-#include <tntdb/connection.h>
-#include <tntdb/connect.h>
-#include <tntdb/result.h>
-#include <tntdb/row.h>
-#include <tntdb/value.h>
 //using namespace std;
 
 
 int main()
 {
     int scelta;
-    tntdb::Connection db=ApriDatabase();
-    tntdb::Value v=db.selectValue("select count(*) from sqlite_master");
-    if(v.getUnsigned()<1)
+    Kompex::SQLiteDatabase *db=ApriDatabase();
+    Kompex::SQLiteStatement *st = new Kompex::SQLiteStatement(db);
+    float ntabelle;
+    ntabelle=st->SqlAggregateFuncResult("select count(*) from sqlite_master;");
+    std::cout << ntabelle;
+    if(ntabelle<1)
     {
         std::cout << 0 << std::endl;
         db=InizializzaDB(db);

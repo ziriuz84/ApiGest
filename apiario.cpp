@@ -3,11 +3,9 @@
 #include <cstdio>
 #include <iomanip>
 #include <string>
-#include <tntdb/connection.h>
-#include <tntdb/statement.h>
-#include <tntdb/result.h>
-#include <tntdb/row.h>
-#include <tntdb/value.h>
+#include <KompexSQLiteDatabase.h>
+#include <KompexSQLiteStatement.h>
+#include <KompexSQLiteException.h>
 #include "functions.h"
 using namespace std;
 
@@ -23,54 +21,67 @@ Apiario::~Apiario()
 
 /** \brief Aggiunge un apiario al database
  *
- * \param db tntdb::Connection il database
- * \return tntdb::Connection il database
+ * \param db Kompex::SQLiteDatabase il database
+ * \return Kompex::SQLiteDatabase il database
  *
  */
-tntdb::Connection Apiario::Aggiungi(tntdb::Connection db)
+Kompex::SQLiteDatabase *Apiario::Aggiungi(Kompex::SQLiteDatabase *db)
 {
-    tntdb::Value v=db.selectValue("select count(*) from Apiari");
-    if (v.getUnsigned()<1)
+    Kompex::SQLiteStatement *st = new Kompex::SQLiteStatement(db);
+    if (st->SqlAggregateFuncResult("select count(*) from Apiari;")<1)
     {
         ID=0;
     }
     else
     {
-        v=db.selectValue("select ID from Apiari where id = (select MAX(ID) from Apiari)");
-        ID=v.getUnsigned()+1;
+        ID=st->SqlAggregateFuncResult("select ID from Apiari where id = (select MAX(ID) from Apiari);");
+        ID++;
     }
     cout << "Nome -> ";
     cin >> Nome;
     cout << "Posizione -> ";
     cin >> Posizione;
-    tntdb::Statement st=db.prepare("INSERT INTO Apiari(ID,Nome,Posizione) VALUES (:v1, :v2, :v3)");
-    st.set("v1",ID).set("v2", Nome).set("v3",Posizione).execute();
+    try
+    {
+        st->Sql("INSERT INTO Apiari(ID,Nome,Posizione) VALUES (?, ?, ?)");
+        st->BindInt(1,ID);
+        st->BindString(2,Nome);
+        st->BindString(3,Posizione);
+        st->ExecuteAndFree();
+    }
+    catch(Kompex::SQLiteException &exception)
+    {
+        std::cerr << "Exception Occured: " << exception.GetString();
+        exception.Show();
+    }
     return db;
 }
 
 /** \brief Elimina un apiario dal database
  *
- * \param db tntdb::Connection il database
- * \return tntdb::Connection il database
+ * \param db Kompex::SQLiteDatabase *il database
+ * \return Kompex::SQLiteDatabase *il database
  *
  */
-tntdb::Connection Apiario::Elimina(tntdb::Connection db)
+Kompex::SQLiteDatabase *Apiario::Elimina(Kompex::SQLiteDatabase *db)
 {
     Visualizza(db);
     cout << "Seleziona l'ID dell'apiario da eliminare" << endl << "ID -> ";
     cin >> ID;
-    tntdb::Statement st=db.prepare("DELETE FROM Apiari WHERE ID = :v1");
-    st.setInt("v1", ID).execute();
+    Kompex::SQLiteStatement *st = new Kompex::SQLiteStatement(db);
+    st->Sql("DELETE FROM Apiari WHERE ID = ?");
+    st->BindInt(1,ID);
+    st->ExecuteAndFree();
     return db;
 }
 
 /** \brief Modifica un apiario del database
  *
- * \param db tntdb::Connection il database
- * \return tntdb::Connection il database
+ * \param db Kompex::SQLiteDatabase *il database
+ * \return Kompex::SQLiteDatabase *il database
  *
  */
-tntdb::Connection Apiario::Modifica(tntdb::Connection db)
+Kompex::SQLiteDatabase *Apiario::Modifica(Kompex::SQLiteDatabase *db)
 {
     Visualizza(db);
     cout << "Seleziona l'ID dell'apiario da modificare" << endl << "ID -> ";
@@ -79,30 +90,33 @@ tntdb::Connection Apiario::Modifica(tntdb::Connection db)
     cin >> Nome;
     cout << "Posizione -> ";
     cin >> Posizione;
-    tntdb::Statement st=db.prepare("update Apiari set Nome = :v1, Posizione = :v2 where id = :v3");
-    st.set("v1", Nome).set("v2", Posizione).set("v3", ID).execute();
+    Kompex::SQLiteStatement *st = new Kompex::SQLiteStatement(db);
+    st->Sql("update Apiari set Nome = ?, Posizione = ? where id = ?");
+    st->BindString(1,Nome);
+    st->BindString(2,Posizione);
+    st->BindInt(3,ID);
+    st->ExecuteAndFree();
     return db;
 }
 
 /** \brief Visualizza tutti gli apiari del database
  *
- * \param db tntdb::Connection il database
+ * \param db Kompex::SQLiteDatabase *il database
  *
  */
-void Apiario::Visualizza(tntdb::Connection db)
+void Apiario::Visualizza(Kompex::SQLiteDatabase *db)
 {
-    tntdb::Result result=db.select("select ID, Nome, Posizione from Apiari");
-    cout << "|" << setw(4) << "ID" << "|" << setw(15) << "Nome" << "|" << setw(20) << "Posizione" << "|" << endl;
-    cout << "|----|---------------|--------------------|" << endl;
-    for (tntdb::Result::const_iterator it =result.begin(); it!=result.end(); ++it)
-    {
-        tntdb::Row row=*it;
-        string id;
-        string nome;
-        string posizione;
-        row[0].get(id);
-        row[1].get(nome);
-        row[2].get(posizione);
-        cout << "|" << setw(4) << id << "|" << setw(15) << nome << "|" << setw(20) << posizione << "|" << endl;
-    }
+    Kompex::SQLiteStatement *st = new Kompex::SQLiteStatement(db);
+//    st->Sql("select ID, Nome, Posizione from Apiari;");
+//    st->Execute();
+//    cout << "|" << setw(4) << "ID" << "|" << setw(15) << "Nome" << "|" << setw(20) << "Posizione" << "|" << endl;
+//    cout << "|----|---------------|--------------------|" << endl;
+//    while (st->FetchRow())
+//    {
+//        cout << "|" << setw(4) << st->GetColumnInt("ID") << "|" << setw(15) << st->GetColumnString("Nome") << "|" << setw(20) << st->GetColumnString("Posizione") << "|" << endl;
+//    }
+//    st->FreeQuery();
+    cout << endl << endl;
+    st->GetTable("select ID, Nome, Posizione from Apiari;");
+    cout << endl << endl;
 }

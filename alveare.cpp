@@ -1,13 +1,12 @@
 #include "alveare.h"
-#include <string>
+
 #include <iostream>
 #include <iomanip>
+#include <string>
+#include <KompexSQLiteDatabase.h>
+#include <KompexSQLiteStatement.h>
+#include <KompexSQLiteException.h>
 #include "functions.h"
-#include <tntdb/connection.h>
-#include <tntdb/value.h>
-#include <tntdb/statement.h>
-#include <tntdb/result.h>
-#include <tntdb/row.h>
 using namespace std;
 
 Alveare::Alveare()
@@ -19,168 +18,375 @@ Alveare::~Alveare()
 {
     //dtor
 }
-tntdb::Connection Alveare::Aggiungi(tntdb::Connection db)
+Kompex::SQLiteDatabase *Alveare::Aggiungi(Kompex::SQLiteDatabase *db)
 {
-    int temp1, temp2, temp3;
+    int temp1;
     string tempstr;
-    tntdb::Value v=db.selectValue("select count(*) from Alveari");
+    Kompex::SQLiteStatement *st = new Kompex::SQLiteStatement(db);
+    Kompex::SQLiteStatement *st2 = new Kompex::SQLiteStatement(db);
     Apiario apiario;
-    if (v.getUnsigned()<1)
+    if (st->SqlAggregateFuncResult("select count(*) from Alveari;")<1)
     {
         ID=0;
     }
     else
     {
-        v=db.selectValue("select ID from Alveari where id = (select MAX(ID) from Alveari)");
-        ID=v.getUnsigned()+1;
+        st->Sql("select ID from Alveari where id = (select MAX(ID) from Alveari);");
+        st->Execute();
+        ID=st->GetColumnInt("ID");
+        ID++;
+        st->FreeQuery();
     }
-    tntdb::Statement st=db.prepare("INSERT INTO Alveari(ID, Nome, Apiario, DataCreazione, Descrizione, Razza, Colore, TipoArnia, Provenienza, AnnoRegina, StatoFamiglia, Posizione) VALUES (:id, :nome, :apiario, :datacreazione, :descrizione, :razza, :colore, :tipoarnia, :provenienza, :annoregina, :statofamiglia, :posizione)");
-    st.set("id", ID);
-    cout << "Inserisci il nome dell'alveare" << endl << "Nome -> ";
-    cin >> tempstr;
-    st.set("nome", tempstr);
-    apiario.Visualizza(db);
-    cout << "Scegli l'ID dell'apiario di appartenenza" << endl << "ID -> ";
-    cin >> temp1;
-    st.set("apiario", temp1);
-    cout << "Seleziona la data di creazione dell'alveare" << endl << "Giorno -> ";
-    cin >> temp1;
-    cout << "Mese -> ";
-    cin >> temp2;
-    cout << "Anno -> ";
-    cin >> temp3;
-    st.set("datacreazione", tntdb::Date(temp3, temp2, temp1));
-    cout << "Inserisci un'eventuale descrizione" << endl;
-    cin >> tempstr;
-    st.set("descrizione", tempstr);
-    tntdb::Result result=db.select("select * from Razze");
-    cout << "|" << setw(4) << "ID" << "|" << setw(27) << "Razza" << "|" << endl;
-    cout << "|----|---------------------------|" << endl;
-    for (tntdb::Result::const_iterator it=result.begin(); it!=result.end(); ++it)
+    try
     {
-        tntdb::Row row=*it;
-        string id, nome;
-        row[0].get(id);
-        row[1].get(nome);
-        cout << "|" << setw(4) << id << "|" << setw(27) << nome << "|" << endl;
+        st->Sql("INSERT INTO Alveari(ID, Nome, Apiario, GiornoCreazione, MeseCreazione, AnnoCreazione, Descrizione, Razza, Colore, TipoArnia, Provenienza, AnnoRegina, StatoFamiglia, Posizione) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        st->BindInt(1, ID);
+        cout << "Inserisci il nome dell'alveare" << endl << "Nome -> ";
+        cin >> tempstr;
+        st->BindString(2, tempstr);
+        apiario.Visualizza(db);
+        cout << "Scegli l'ID dell'apiario di appartenenza" << endl << "ID -> ";
+        cin >> temp1;
+        st->BindInt(3, temp1);
+        cout << "Seleziona la data di creazione dell'alveare" << endl;
+        cout << "Giorno ->";
+        cin >> temp1;
+        st->BindInt(4, temp1);
+        cout << "Mese -> ";
+        cin >> temp1;
+        st->BindInt(5, temp1);
+        cout << "Anno -> ";
+        cin >> temp1;
+        st->BindInt(6, temp1);
+        cout << "Inserisci un'eventuale descrizione" << endl;
+        cin >> tempstr;
+        st->BindString(7, tempstr);
+        st2->GetTable("select * from Razze;");
+        st2->FreeQuery();
+        cout << "Seleziona la razza" << endl << "ID -> ";
+        cin >> temp1;
+        st->BindInt(8, temp1);
+        cout << "Inserisci il colore dell'arnia" << endl << "Colore -> ";
+        cin >> tempstr;
+        st->BindString(9, tempstr);
+        st2->GetTable("select * from TipiArnia;");
+        st2->FreeQuery();
+        cout << "Seleziona l'ID del tipo di arnia corretto" << endl << "ID -> ";
+        cin >> temp1;
+        st->BindInt(10, temp1);
+        st2->GetTable("select * from Provenienze;");
+        st2->FreeQuery();
+        cout << "Seleziona l'ID della provenienza corretta" << endl << "ID -> ";
+        cin >> temp1;
+        st->BindInt(11, temp1);
+        cout << "Inserisci l'anno di nascita della regina" << endl << "Anno -> ";
+        cin >> temp1;
+        st->BindInt(12, temp1);
+        st2->GetTable("select * from StatoFamiglia;");
+        st2->FreeQuery();
+        cout << "Dai un voto allo stato della famiglia [0-4]" << endl << "Voto -> ";
+        cin >> temp1;
+        st->BindInt(13, temp1);
+        cout << "Indica la posizione dell'arnia nell'apiario" << endl << "Posizione -> ";
+        cin >> temp1;
+        st->BindInt(14, temp1);
+        st->ExecuteAndFree();
     }
-    cout << "Seleziona la razza" << endl << "ID -> ";
-    cin >> temp1;
-    st.set("razza", temp1);
-    cout << "Inserisci il colore dell'arnia" << endl << "Colore -> ";
-    cin >> tempstr;
-    st.set("colore", tempstr);
-    result=db.select("select * from TipiArnia");
-    cout << "|" << setw(4) << "ID" << "|" << setw(16) << "Tipo arnia" << "|" << endl;
-    cout << "|----|----------------|" << endl;
-    for (tntdb::Result::const_iterator it=result.begin(); it!=result.end(); ++it)
+    catch (Kompex::SQLiteException &exception)
     {
-        tntdb::Row row=*it;
-        string id, nome;
-        row[0].get(id);
-        row[1].get(nome);
-        cout << "|" << setw(4) << id << "|" << setw(16) << nome << "|" << endl;
+        cout << exception.GetString();
     }
-    cout << "Seleziona l'ID del tipo di arnia corretto" << endl << "ID -> ";
-    cin >> temp1;
-    st.set("tipoarnia", temp1);
-    result=db.select("select * from Provenienze");
-    cout << "|" << setw(4) << "ID" << "|" << setw(25) << "Provenienza" << "|" << endl;
-    cout << "|----|-------------------------|" << endl;
-    for (tntdb::Result::const_iterator it=result.begin(); it!=result.end(); ++it)
-    {
-        tntdb::Row row=*it;
-        string id, nome;
-        row[0].get(id);
-        row[1].get(nome);
-        cout << "|" << setw(4) << id << "|" << setw(25) << nome << "|" << endl;
-    }
-    cout << "Seleziona l'ID della provenienza corretta" << endl << "ID -> ";
-    cin >> temp1;
-    st.set("provenienza", temp1);
-    cout << "Inserisci l'anno di nascita della regina" << endl << "Anno -> ";
-    cin >> temp1;
-    st.set("annoregina", temp1);
-    result=db.select("select * from StatoFamiglia");
-    cout << "|" << setw(4) << "ID" << "|" << setw(16) << "Stato Famiglia" << "|" << endl;
-    cout << "|----|----------------|" << endl;
-    for (tntdb::Result::const_iterator it=result.begin(); it!=result.end(); ++it)
-    {
-        tntdb::Row row=*it;
-        string id, nome;
-        row[0].get(id);
-        row[1].get(nome);
-        cout << "|" << setw(4) << id << "|" << setw(16) << nome << "|" << endl;
-    }
-    cout << "Dai un voto allo stato della famiglia [0-4]" << endl << "Voto -> ";
-    cin >> temp1;
-    st.set("statofamiglia", temp1);
-    cout << "Indica la posizione dell'arnia nell'apiario" << endl << "Posizione -> ";
-    cin >> temp1;
-    st.set("posizione", temp1).execute();
     return db;
 }
 
-tntdb::Connection Alveare::Elimina(tntdb::Connection db)
+Kompex::SQLiteDatabase *Alveare::Elimina(Kompex::SQLiteDatabase *db)
 {
-    tntdb::Result result=db.select("select Alveari.ID, Alveari.Nome, Apiari.Nome from Alveari join Apiari on Apiari.id = Alveari.Apiario");
-    string apiario;
+    Kompex::SQLiteStatement *st = new Kompex::SQLiteStatement(db);
     int id;
-    cout << "|" << setw(4) << "ID" << "|" << setw(15) << "Nome" << "|" << setw(15) << "Apiario" << "|" << endl;
-    cout << "|----|---------------|---------------|" << endl;
-    for (tntdb::Result::const_iterator it=result.begin();it!=result.end();++it){
-        tntdb::Row row=*it;
-        row[0].get(ID);
-        row[1].get(Nome);
-        row[2].get(apiario);
-        cout << "|" << setw(4) << ID << "|" << setw(15) << Nome << "|" << setw(15) << apiario << "|" << endl;
-    }
+    st->GetTable("select Alveari.ID, Alveari.Nome, Apiari.Nome from Alveari join Apiari on Apiari.id = Alveari.Apiario;");
     cout << "Seleziona l'ID dell'alveare da eliminare" << endl << "ID -> ";
     cin >> id;
-    tntdb::Statement st=db.prepare("DELETE FROM Alveari WHERE ID = :id");
-    st.set("id", id).execute();
+    st->FreeQuery();
+    st->Sql("DELETE FROM Alveari WHERE ID = ?;");
+    st->BindInt(1,id);
+    st->ExecuteAndFree();
     return db;
 }
 
-void Alveare::Modifica()
+Kompex::SQLiteDatabase *Alveare::Modifica(Kompex::SQLiteDatabase *db)
 {
-    //Modifica
+    Kompex::SQLiteStatement *st = new Kompex::SQLiteStatement(db);
+    Kompex::SQLiteStatement *st2 = new Kompex::SQLiteStatement(db);
+    int id;
+    st->GetTable("select Alveari.ID, Alveari.Nome, Apiari.Nome from Alveari join Apiari on Apiari.id = Alveari.Apiario;");
+    cout << "Seleziona l'ID dell'alveare da modificare" << endl << "ID -> ";
+    cin >> id;
+// TODO (sirio#1#): Questa query da un errore. sqlite3_step ritorna un valore 100 che non dovrebbe, sembrerebbe non chiuda la riga
+    try
+    {
+        st2->Sql("select Alveari.ID, Alveari.Nome, Apiari.Nome, Alveari.GiornoCreazione, Alveari.MeseCreazione, Alveari.AnnoCreazione, Alveari.Descrizione, Razze.Nome, Alveari.Colore, TipiArnia.Nome, Provenienze.Provenienza, Alveari.AnnoRegina, StatoFamiglia.StatoFamiglia, Alveari.Posizione from Alveari join Apiari on Apiari.id=Alveari.Apiario join Razze on Razze.ID=Alveari.Razza join TipiArnia on TipiArnia.id=Alveari.TipoArnia join Provenienze on Provenienze.id = Alveari.Provenienza join StatoFamiglia on StatoFamiglia.id=Alveari.StatoFamiglia where Alveari.ID = ?;");
+        st2->BindInt(1,id);
+        st2->Execute();
+//        st->FreeQuery();
+    }
+    catch (Kompex::SQLiteException &e)
+    {
+        e.Show();
+    }
+    string a;
+    cout << st2->FetchRow();
+    while (st2->FetchRow())
+    {
+        cout << left << setw(20) << "ID" << ": " << st2->GetColumnInt(0) << endl;
+        cout << setw(20) << "1 - Nome" << ": " << st2->GetColumnString(1) << endl;
+        cout << setw(20) << "2 - Apiario" << ": " << st2->GetColumnString(2) << endl;
+        cout << setw(20) << "3 - Creato il" << ": " << st2->GetColumnInt(3) << "/" << st2->GetColumnInt(4) << "/" << st2->GetColumnInt(5) << endl;
+        cout << setw(20) << "4 - Descrizione" << ": " << st2->GetColumnString(6) << endl;
+        cout << setw(20) << "5 - Razza" << ": " << st2->GetColumnString(7) << endl;
+        cout << setw(20) << "6 - Colore" << ": " << st2->GetColumnString(8) << endl;
+        cout << setw(20) << "7 - Tipo di Arnia" << ": " << st2->GetColumnString(9) << endl;
+        cout << setw(20) << "8 - Provenienza" << ": " << st2->GetColumnString(10) << endl;
+        cout << setw(20) << "9 - Anno Regina" << ": " << st2->GetColumnInt(11) << endl;
+        cout << setw(20) << "10 - Stato della famiglia" << ": " << st2->GetColumnString(12) << endl;
+        cout << setw(20) << "11 - Posizione" << ": " << st2->GetColumnInt(13) << endl;
+    }
+    cout << "Quale valore vuoi modificare?" << endl;
+    cout << "Valore -> ";
+    int valore;
+    cin >> valore;
+    Alveare alveare;
+    switch(valore)
+    {
+    case 1:
+        db=alveare.SetNome(db, st2->GetColumnInt(0));
+        break;
+    case 2:
+        db=alveare.SetLocation(db, st2->GetColumnInt(0));
+        break;
+    case 3:
+        db=alveare.SetDataCreazione(db, st2->GetColumnInt(0));
+        break;
+    case 4:
+        db=alveare.SetDescrizione(db, st2->GetColumnInt(0));
+        break;
+    case 5:
+        db=alveare.SetRazza(db, st2->GetColumnInt(0));
+        break;
+    case 6:
+        db=alveare.SetColore(db, st2->GetColumnInt(0));
+        break;
+    case 7:
+        db=alveare.SetTipoArnia(db, st2->GetColumnInt(0));
+        break;
+    case 8:
+        db=alveare.SetProvenienza(db, st2->GetColumnInt(0));
+        break;
+    case 9:
+        db=alveare.SetAnnoRegina(db, st2->GetColumnInt(0));
+        break;
+    case 10:
+        db=alveare.SetStatoFamiglia(db, st2->GetColumnInt(0));
+        break;
+    case 11:
+        db=alveare.SetPosizione(db, st2->GetColumnInt(0));
+        break;
+    }
+    st2->FreeQuery();
+    st->FreeQuery();
+    return db;
 }
 
-void Alveare::Visualizza(tntdb::Connection db)
+void Alveare::Visualizza(Kompex::SQLiteDatabase *db)
 {
-    tntdb::Result result=db.select("select Alveari.ID, Alveari.Nome, Apiari.Nome, Alveari.DataCreazione, Alveari.Descrizione, Razze.Nome, Alveari.Colore, TipiArnia.Nome, Provenienze.Provenienza, Alveari.AnnoRegina, StatoFamiglia.StatoFamiglia, Alveari.Posizione from Alveari join Apiari on Apiari.id=Alveari.Apiario join Razze on Razze.ID=Alveari.Razza join TipiArnia on TipiArnia.id=Alveari.TipoArnia join Provenienze on Provenienze.id = Alveari.Provenienza join StatoFamiglia on StatoFamiglia.id=Alveari.StatoFamiglia");
-    string a;
-    for (tntdb::Result::const_iterator it=result.begin(); it!=result.end(); ++it)
+    Kompex::SQLiteStatement *st = new Kompex::SQLiteStatement(db);
+    try
     {
-        tntdb::Row row=*it;
-        string valore;
-        tntdb::Date data;
-        row[0].get(ID);
-        cout << left << setw(20) << "ID" << ": " << ID << endl;
-        row[1].get(Nome);
-        cout << setw(20) << "Nome" << ": " << Nome << endl;
-        row[2].get(valore);
-        cout << setw(20) << "Apiario" << ": " << valore << endl;
-        row[3].get(data);
-        cout << setw(20) << "Creato il" << ": " << data.getIso() << endl;
-        row[4].get(Descrizione);
-        cout << setw(20) << "Descrizione" << ": " << Descrizione << endl;
-        row[5].get(Razza);
-        cout << setw(20) << "Razza" << ": " << Razza << endl;
-        row[6].get(Colore);
-        cout << setw(20) << "Colore" << ": " << Colore << endl;
-        row[7].get(TipoArnia);
-        cout << setw(20) << "Tipo di Arnia" << ": " << TipoArnia << endl;
-        row[8].get(Provenienza);
-        cout << setw(20) << "Provenienza" << ": " << Provenienza << endl;
-        row[9].get(AnnoRegina);
-        cout << setw(20) << "Anno Regina" << ": " << AnnoRegina << endl;
-        row[10].get(StatoFamiglia);
-        cout << setw(20) << "Stato della famiglia" << ": " << StatoFamiglia << endl;
-        row[11].get(Posizione);
-        cout << setw(20) << "Posizione" << ": " << Posizione<<endl;
-        cout << "Premi un carattere qualsiasi e batti invio" << endl;
-        cin >> a;
+        st->Sql("select Alveari.ID, Alveari.Nome, Apiari.Nome, Alveari.GiornoCreazione, Alveari.MeseCreazione, Alveari.AnnoCreazione, Alveari.Descrizione, Razze.Nome, Alveari.Colore, TipiArnia.Nome, Provenienze.Provenienza, Alveari.AnnoRegina, StatoFamiglia.StatoFamiglia, Alveari.Posizione from Alveari join Apiari on Apiari.id=Alveari.Apiario join Razze on Razze.ID=Alveari.Razza join TipiArnia on TipiArnia.id=Alveari.TipoArnia join Provenienze on Provenienze.id = Alveari.Provenienza join StatoFamiglia on StatoFamiglia.id=Alveari.StatoFamiglia");
+        string a;
+        while (st->FetchRow())
+        {
+            string valore;
+            cout << left << setw(20) << "ID" << ": " << st->GetColumnInt(0) << endl;
+            cout << setw(20) << "Nome" << ": " << st->GetColumnString(1) << endl;
+            cout << setw(20) << "Apiario" << ": " << st->GetColumnString(2) << endl;
+            cout << setw(20) << "Creato il" << ": " << st->GetColumnInt(3) << "/" << st->GetColumnInt(4) << "/" << st->GetColumnInt(5) << endl;
+            cout << setw(20) << "Descrizione" << ": " << st->GetColumnString(6) << endl;
+            cout << setw(20) << "Razza" << ": " << st->GetColumnString(7) << endl;
+            cout << setw(20) << "Colore" << ": " << st->GetColumnString(8) << endl;
+            cout << setw(20) << "Tipo di Arnia" << ": " << st->GetColumnString(9) << endl;
+            cout << setw(20) << "Provenienza" << ": " << st->GetColumnString(10) << endl;
+            cout << setw(20) << "Anno Regina" << ": " << st->GetColumnInt(11) << endl;
+            cout << setw(20) << "Stato della famiglia" << ": " << st->GetColumnString(12) << endl;
+            cout << setw(20) << "Posizione" << ": " << st->GetColumnInt(13) << endl;
+            cout << "Premi un carattere qualsiasi e batti invio" << endl;
+            cin >> a;
+        }
+        st->FreeQuery();
     }
+    catch (Kompex::SQLiteException &exception)
+    {
+        cout << exception.GetString();
+    }
+}
+
+Kompex::SQLiteDatabase *Alveare::SetNome(Kompex::SQLiteDatabase *db, int id)
+{
+    cout << "Nuovo Nome -> ";
+    string valore;
+    try
+    {
+        Kompex::SQLiteStatement *st=new Kompex::SQLiteStatement(db);
+        st->Sql("UPDATE Alveari SET Nome = ? WHERE ID = ?;");
+        st->BindInt(2,id);
+        cin >> valore;
+        st->BindString(1,valore);
+        st->ExecuteAndFree();
+    }
+    catch(Kompex::SQLiteException &e)
+    {
+        cout << e.GetString();
+    }
+    return db;
+}
+
+Kompex::SQLiteDatabase *Alveare::SetLocation(Kompex::SQLiteDatabase *db, int id)
+{
+    Apiario apiario;
+    apiario.Visualizza(db);
+    cout << "ID Nuovo Apiario -> ";
+    string valore;
+    Kompex::SQLiteStatement *st=new Kompex::SQLiteStatement(db);
+    st->Sql("UPDATE Alveari SET Apiario = ? WHERE ID = ?");
+    st->BindInt(2, id);
+    cin >> valore;
+    st->BindString(1, valore);
+    st->ExecuteAndFree();
+    return db;
+}
+
+Kompex::SQLiteDatabase *Alveare::SetDataCreazione(Kompex::SQLiteDatabase *db, int id)
+{
+    Kompex::SQLiteStatement *st=new Kompex::SQLiteStatement(db);
+    st->Sql("UPDATE Alveari SET GiornoCreazione = ?, MeseCreazione = ?, AnnoCreazione = ? WHERE ID=?;");
+    int valore;
+    cout << "Giorno -> ";
+    cin >> valore;
+    st->BindInt(1, valore);
+    cout << "Mese -> ";
+    cin >> valore;
+    st->BindInt(2, valore);
+    cout << "Anno -> ";
+    cin >> valore;
+    st->BindInt(3, valore);
+    st->BindInt(4, id);
+    st->ExecuteAndFree();
+    return db;
+}
+
+Kompex::SQLiteDatabase *Alveare::SetDescrizione(Kompex::SQLiteDatabase *db, int id)
+{
+    Kompex::SQLiteStatement *st=new Kompex::SQLiteStatement(db);
+    st->Sql("UPDATE Alveari SET Descrizione = ? WHERE ID = ?");
+    string valore;
+    cout << "Nuova Descrizione -> ";
+    st->BindString(1, valore);
+    st->BindInt(2, id);
+    st->ExecuteAndFree();
+    return db;
+}
+
+Kompex::SQLiteDatabase *Alveare::SetRazza(Kompex::SQLiteDatabase *db, int id)
+{
+    Kompex::SQLiteStatement *st=new Kompex::SQLiteStatement(db);
+    st->GetTable("SELECT * FROM Razze");
+    st->FreeQuery();
+    st->Sql("UPDATE Alveari SET Razza = ? WHERE ID = ?;");
+    int valore;
+    cout << "ID Nuova Razza -> ";
+    cin >> valore;
+    st->BindInt(1, valore);
+    st->BindInt(2, id);
+    st->ExecuteAndFree();
+    return db;
+}
+
+Kompex::SQLiteDatabase *Alveare::SetColore(Kompex::SQLiteDatabase *db, int id)
+{
+    Kompex::SQLiteStatement *st=new Kompex::SQLiteStatement(db);
+    st->Sql("UPDATE Alveari SET Colore = ? WHERE ID = ?;");
+    string valore;
+    cout << "Nuova Descrizione -> ";
+    cin >> valore;
+    st->BindString(1, valore);
+    st->BindInt(2, id);
+    st->ExecuteAndFree();
+    return db;
+}
+
+Kompex::SQLiteDatabase *Alveare::SetTipoArnia(Kompex::SQLiteDatabase *db, int id)
+{
+    Kompex::SQLiteStatement *st=new Kompex::SQLiteStatement(db);
+    st->GetTable("SELECT * FROM TipiArnia");
+    int valore;
+    cout << "ID Nuovo tipo arnia -> ";
+    cin >> valore;
+    st->Sql("UPDATE Alveari SET TipoArnia = ? WHERE ID = ?;");
+    st->BindInt(1, valore);
+    st->BindInt(2, id);
+    st->ExecuteAndFree();
+    return db;
+}
+
+Kompex::SQLiteDatabase *Alveare::SetProvenienza(Kompex::SQLiteDatabase *db, int id)
+{
+    Kompex::SQLiteStatement *st=new Kompex::SQLiteStatement(db);
+    st->GetTable("SELECT * FROM Provenienze;");
+    int valore;
+    cout << "ID Nuova provenienza -> ";
+    cin >> valore;
+    st->Sql("UPDATE Alveari SET Provenienza = ? WHERE ID = ?;");
+    st->BindInt(1, valore);
+    st->BindInt(2, id);
+    st->ExecuteAndFree();
+    return db;
+}
+
+Kompex::SQLiteDatabase *Alveare::SetStatoFamiglia(Kompex::SQLiteDatabase *db, int id)
+{
+    Kompex::SQLiteStatement *st=new Kompex::SQLiteStatement(db);
+    st->GetTable("SELECT * FROM StatoFamiglia;");
+    int valore;
+    cout << "ID Nuovo Stato della famiglia -> ";
+    cin >> valore;
+    st->Sql("UPDATE Alveari SET StatoFamiglia = ? WHERE ID = ?;");
+    st->BindInt(1, valore);
+    st->BindInt(2, id);
+    st->ExecuteAndFree();
+    return db;
+}
+
+Kompex::SQLiteDatabase *Alveare::SetPosizione(Kompex::SQLiteDatabase *db, int id)
+{
+    Kompex::SQLiteStatement *st=new Kompex::SQLiteStatement(db);
+    int valore;
+    cout << "Nuova Posizione -> ";
+    cin >> valore;
+    st->Sql("UPDATE Alveari SET Posizione = ? WHERE ID = ?;");
+    st->BindInt(1, valore);
+    st->BindInt(2, id);
+    st->ExecuteAndFree();
+    return db;
+}
+
+Kompex::SQLiteDatabase *Alveare::SetAnnoRegina(Kompex::SQLiteDatabase *db, int id)
+{
+    Kompex::SQLiteStatement *st=new Kompex::SQLiteStatement(db);
+    int valore;
+    cout << "Nuovo Anno di nascita della regina -> ";
+    cin >> valore;
+    st->Sql("UPDATE Alveari SET AnnoRegina = ? WHERE ID = ?;");
+    st->BindInt(1, valore);
+    st->BindInt(2, id);
+    st->ExecuteAndFree();
+    return db;
 }

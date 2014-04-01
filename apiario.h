@@ -1,8 +1,7 @@
 #ifndef APIARIO_H
 #define APIARIO_H
 #include <iostream>
-#include <sqlite3.h>
-#include <tntdb/connection.h>
+#include <KompexSQLiteDatabase.h>
 #include <string>
 using namespace std;
 
@@ -16,19 +15,19 @@ public:
     /** Add Alveare
      *
      */
-    tntdb::Connection Aggiungi(tntdb::Connection);
+    Kompex::SQLiteDatabase *Aggiungi(Kompex::SQLiteDatabase *);
     /** Modify Alveare
      *
      */
-    tntdb::Connection Modifica(tntdb::Connection);
+    Kompex::SQLiteDatabase *Modifica(Kompex::SQLiteDatabase *);
     /** Delete Alveare
      *
      */
-    tntdb::Connection Elimina(tntdb::Connection);
+    Kompex::SQLiteDatabase *Elimina(Kompex::SQLiteDatabase *);
     /** Show Alveare
      *
      */
-    void Visualizza(tntdb::Connection);
+    void Visualizza(Kompex::SQLiteDatabase *);
 protected:
 private:
 //    unsigned int ID; //!< Member variable "ID"
