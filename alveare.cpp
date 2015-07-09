@@ -3,12 +3,9 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <KompexSQLiteDatabase.h>
-#include <KompexSQLiteStatement.h>
-#include <KompexSQLiteException.h>
 #include "functions.h"
 using namespace std;
-
+/*
 Alveare::Alveare()
 {
     //ctor
@@ -390,3 +387,4 @@ Kompex::SQLiteDatabase *Alveare::SetAnnoRegina(Kompex::SQLiteDatabase *db, int i
     st->ExecuteAndFree();
     return db;
 }
+*/

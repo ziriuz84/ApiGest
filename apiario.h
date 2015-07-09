@@ -1,7 +1,6 @@
 #ifndef APIARIO_H
 #define APIARIO_H
 #include <iostream>
-#include <KompexSQLiteDatabase.h>
 #include <string>
 using namespace std;
 
@@ -15,19 +14,19 @@ public:
     /** Add Alveare
      *
      */
-    Kompex::SQLiteDatabase *Aggiungi(Kompex::SQLiteDatabase *);
+//    Kompex::SQLiteDatabase *Aggiungi(Kompex::SQLiteDatabase *);
     /** Modify Alveare
      *
      */
-    Kompex::SQLiteDatabase *Modifica(Kompex::SQLiteDatabase *);
+//    Kompex::SQLiteDatabase *Modifica(Kompex::SQLiteDatabase *);
     /** Delete Alveare
      *
      */
-    Kompex::SQLiteDatabase *Elimina(Kompex::SQLiteDatabase *);
+//    Kompex::SQLiteDatabase *Elimina(Kompex::SQLiteDatabase *);
     /** Show Alveare
      *
      */
-    void Visualizza(Kompex::SQLiteDatabase *);
+//    void Visualizza(Kompex::SQLiteDatabase *);
 protected:
 private:
 //    unsigned int ID; //!< Member variable "ID"

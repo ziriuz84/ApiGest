@@ -3,12 +3,9 @@
 #include <cstdio>
 #include <iomanip>
 #include <string>
-#include <KompexSQLiteDatabase.h>
-#include <KompexSQLiteStatement.h>
-#include <KompexSQLiteException.h>
 #include "functions.h"
 using namespace std;
-
+/*
 Apiario::Apiario()
 {
     //ctor
@@ -17,14 +14,14 @@ Apiario::Apiario()
 Apiario::~Apiario()
 {
     //dtor
-}
+}*/
 
 /** \brief Aggiunge un apiario al database
  *
  * \param db Kompex::SQLiteDatabase il database
  * \return Kompex::SQLiteDatabase il database
  *
- */
+ *//*
 Kompex::SQLiteDatabase *Apiario::Aggiungi(Kompex::SQLiteDatabase *db)
 {
     Kompex::SQLiteStatement *st = new Kompex::SQLiteStatement(db);
@@ -55,14 +52,14 @@ Kompex::SQLiteDatabase *Apiario::Aggiungi(Kompex::SQLiteDatabase *db)
         exception.Show();
     }
     return db;
-}
+}*/
 
 /** \brief Elimina un apiario dal database
  *
  * \param db Kompex::SQLiteDatabase *il database
  * \return Kompex::SQLiteDatabase *il database
  *
- */
+ *//*
 Kompex::SQLiteDatabase *Apiario::Elimina(Kompex::SQLiteDatabase *db)
 {
     Visualizza(db);
@@ -73,14 +70,14 @@ Kompex::SQLiteDatabase *Apiario::Elimina(Kompex::SQLiteDatabase *db)
     st->BindInt(1,ID);
     st->ExecuteAndFree();
     return db;
-}
+}*/
 
 /** \brief Modifica un apiario del database
  *
  * \param db Kompex::SQLiteDatabase *il database
  * \return Kompex::SQLiteDatabase *il database
  *
- */
+ *//*
 Kompex::SQLiteDatabase *Apiario::Modifica(Kompex::SQLiteDatabase *db)
 {
     Visualizza(db);
@@ -97,13 +94,13 @@ Kompex::SQLiteDatabase *Apiario::Modifica(Kompex::SQLiteDatabase *db)
     st->BindInt(3,ID);
     st->ExecuteAndFree();
     return db;
-}
+}*/
 
 /** \brief Visualizza tutti gli apiari del database
  *
  * \param db Kompex::SQLiteDatabase *il database
  *
- */
+ *//*
 void Apiario::Visualizza(Kompex::SQLiteDatabase *db)
 {
     Kompex::SQLiteStatement *st = new Kompex::SQLiteStatement(db);
@@ -120,3 +117,4 @@ void Apiario::Visualizza(Kompex::SQLiteDatabase *db)
     st->GetTable("select ID, Nome, Posizione from Apiari;");
     cout << endl << endl;
 }
+*/
