@@ -1,12 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from curses import wrapper
+import urwid
 import functions
+import interface
 
+if __name__ == "__main__":
 
-def main(stdscr):
-
-
-
-wrapper(main)
+    loop = urwid.MainLoop()
+    loop.run()
