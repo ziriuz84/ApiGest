@@ -9,11 +9,13 @@ def exit_on_q(key):
 
 
 def item_chosen(button, choice):
-    response = urwid.Text([u'You chose ', choice, u'\nWork in progress'])
-    done = urwid.Button(u'Ok')
-    urwid.connect_signal(done, 'click', exit_program)
-    main.original_widget = urwid.Filler(urwid.Pile(
-        [response, urwid.AttrMap(done, None, focus_map='reversed')]))
+    if choice == u"Amministrazione Alveari":
+        response = MenuAlveari()
+    elif choice == u"Amministrazione Apiari":
+        response = MenuApiari()
+    else:
+        response = MenuPrincipale()
+    main.original_widget = response
 
 
 def menu(title, choices):
@@ -30,13 +32,41 @@ def exit_program(button):
 
 
 def MenuPrincipale():
+    global main
     choices = u"Amministrazione Alveari|"
     choices += u"Amministrazione Apiari|"
-    choices += u"Amministrazione Materiale|"
-    choices += u"Amministrazione Visite"
     choices = choices.split("|")
-    global main
     main = urwid.Padding(menu(u'Menu Principale', choices), left=2, right=2)
+    top = urwid.Overlay(main, urwid.SolidFill(u'\N{MEDIUM SHADE}'),
+                        align='center', width=('relative', 60),
+                        valign='middle', height=('relative', 60),
+                        min_width=20, min_height=9)
+    return top
+
+
+def MenuApiari():
+    choices = u"Aggiungi Apiario|"
+    choices += u"Modifica Apiario|"
+    choices += u"Elimina Apiario|"
+    choices += u"Torna al Menu Principale"
+    choices = choices.split("|")
+    main = urwid.Padding(menu(u"Amministrazione Apiari", choices), left=2,
+                         right=2)
+    top = urwid.Overlay(main, urwid.SolidFill(u'\N{MEDIUM SHADE}'),
+                        align='center', width=('relative', 60),
+                        valign='middle', height=('relative', 60),
+                        min_width=20, min_height=9)
+    return top
+
+
+def MenuAlveari():
+    choices = u"Aggiungi Alveare|"
+    choices += u"Modifica Alveare|"
+    choices += u"Elimina Alveare|"
+    choices += u"Torna al Menu Principale"
+    choices = choices.split("|")
+    main = urwid.Padding(menu(u"Amministrazione Alveare", choices), left=2,
+                         right=2)
     top = urwid.Overlay(main, urwid.SolidFill(u'\N{MEDIUM SHADE}'),
                         align='center', width=('relative', 60),
                         valign='middle', height=('relative', 60),
