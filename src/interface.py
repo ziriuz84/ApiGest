@@ -34,7 +34,7 @@ def exit_program(button):
 def MenuPrincipale():
     global main
     choices = u"Amministrazione Alveari|"
-    choices += u"Amministrazione Apiari|"
+    choices += u"Amministrazione Apiari"
     choices = choices.split("|")
     main = urwid.Padding(menu(u'Menu Principale', choices), left=2, right=2)
     top = urwid.Overlay(main, urwid.SolidFill(u'\N{MEDIUM SHADE}'),
