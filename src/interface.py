@@ -38,8 +38,8 @@ def MenuPrincipale():
     choices = choices.split("|")
     main = urwid.Padding(menu(u'Menu Principale', choices), left=2, right=2)
     top = urwid.Overlay(main, urwid.SolidFill(u'\N{MEDIUM SHADE}'),
-                        align='center', width=('relative', 60),
-                        valign='middle', height=('relative', 60),
+                        align='center', width=('relative', 90),
+                        valign='middle', height=('relative', 90),
                         min_width=20, min_height=9)
     return top
 
@@ -53,8 +53,8 @@ def MenuApiari():
     main = urwid.Padding(menu(u"Amministrazione Apiari", choices), left=2,
                          right=2)
     top = urwid.Overlay(main, urwid.SolidFill(u'\N{MEDIUM SHADE}'),
-                        align='center', width=('relative', 60),
-                        valign='middle', height=('relative', 60),
+                        align='center', width=('relative', 100),
+                        valign='middle', height=('relative', 100),
                         min_width=20, min_height=9)
     return top
 
