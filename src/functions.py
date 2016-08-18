@@ -148,6 +148,6 @@ def InizializzaDB(db):
         sqlstatement += "'Due cicli da 5ml a telaino ogni 21 giorni')"
         db.execute(sqlstatement)
     except sqlite3.Error, e:
-        print "Errore nella scrittura delle query:"
-        print e.args[0]
+        print("Errore nella scrittura delle query:")
+        print(e.args[0])
         sys.exit(1)

@@ -2,7 +2,7 @@
 
 import apiario
 
-def MenuApiari():
+def MenuApiari(db):
     scelta = 5
     while scelta != 0:
         print "Gestione apiari"
@@ -13,8 +13,9 @@ def MenuApiari():
         print "4 - Elenca Apiari"
         print "0 - Torna Indietro"
         scelta = input("Scelta-> ")
+        print "\n\n\n\n"
 
-def MenuPrincipale():
+def MenuPrincipale(db):
     scelta = 5
     while (scelta != 0):
         print "Benvenuto in Apigest 0.1"
@@ -23,9 +24,10 @@ def MenuPrincipale():
         print "1 - Gestione Apiari"
         print "0 - Esci"
         scelta = input("scelta-> ")
+        print "\n\n\n\n"
         if scelta == 1:
-            MenuApiari()
+            MenuApiari(db)
 
-def Interfaccia():
-    MenuPrincipale()
+def Interfaccia(db):
+    MenuPrincipale(db)
 
