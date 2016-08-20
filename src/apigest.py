@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import functions
+from functions import TestDatabase
 from interface import Interfaccia
 import sqlite3 as lite
 
@@ -13,5 +13,6 @@ if __name__ == "__main__":
     except lite.Error, e:
         print "Error %s: " % e.args[0]
         sys.exit(1)
+    TestDatabase(con)
     Interfaccia(con)
     con.close()

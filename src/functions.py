@@ -151,3 +151,10 @@ def InizializzaDB(db):
         print("Errore nella scrittura delle query:")
         print(e.args[0])
         sys.exit(1)
+
+def TestDatabase(db):
+    cur = db.cursor()
+    cur.execute("select count(*) from sqlite_master")
+    val = cur.fetchone()
+    if val < 1:
+        InizializzaDB(db)
