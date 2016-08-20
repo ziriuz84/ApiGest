@@ -147,10 +147,11 @@ def InizializzaDB(db):
         sqlstatement += "'Acido Ossalico gocciolato', "
         sqlstatement += "'Due cicli da 5ml a telaino ogni 21 giorni')"
         db.execute(sqlstatement)
-    except sqlite3.Error, e:
+    except sqlite3.Error as e:
         print("Errore nella scrittura delle query:")
         print(e.args[0])
         sys.exit(1)
+
 
 def TestDatabase(db):
     cur = db.cursor()
