@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from functions import WIP
+
 
 def MenuApiari(db):
     scelta = 5
@@ -13,6 +15,14 @@ def MenuApiari(db):
         print("0 - Torna Indietro")
         scelta = eval(input("Scelta-> "))
         print("\n\n\n\n")
+        if scelta == 1:
+            WIP()
+        if scelta == 2:
+            WIP()
+        if scelta == 3:
+            WIP()
+        if scelta == 4:
+            WIP()
 
 
 def MenuPrincipale(db):

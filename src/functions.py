@@ -179,3 +179,7 @@ def TestDatabase(db):
     cur.execute("select count(*) from sqlite_master")
     if cur.fetchone() < (1,):
         InizializzaDB(db)
+
+
+def WIP():
+    print("Work in Progress")
