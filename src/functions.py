@@ -79,69 +79,90 @@ def InizializzaDB(db):
         db.execute(sqlstatement)
         sqlstatement = "INSERT INTO Nutrizioni(ID, Nutrizione) "
         sqlstatement += "VALUES(0, 'Assente'); "
-        sqlstatement += "INSERT INTO Nutrizioni(ID, Nutrizione) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO Nutrizioni(ID, Nutrizione) "
         sqlstatement += "VALUES(1,'Candito');"
-        sqlstatement += "INSERT INTO Nutrizioni(ID, Nutrizione) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO Nutrizioni(ID, Nutrizione) "
         sqlstatement += "VALUES(2,'Candito con polline');"
-        sqlstatement += "INSERT INTO Nutrizioni(ID, Nutrizione) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO Nutrizioni(ID, Nutrizione) "
         sqlstatement += "VALUES(3,'Sciroppo');"
-        sqlstatement += "INSERT INTO Nutrizioni(ID, Nutrizione) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO Nutrizioni(ID, Nutrizione) "
         sqlstatement += "VALUES(4,'Sciroppo con Apiherb')"
         db.execute(sqlstatement)
         sqlstatement = "INSERT INTO ScopiNutrizione(ID, Scopo) "
         sqlstatement += "VALUES(0,'Emergenza');"
-        sqlstatement += "INSERT INTO ScopiNutrizione(ID, Scopo) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO ScopiNutrizione(ID, Scopo) "
         sqlstatement += "VALUES(1,'Invernale')"
         db.execute(sqlstatement)
         sqlstatement = "INSERT INTO StatoFamiglia(ID,StatoFamiglia) "
         sqlstatement += "VALUES (0, 'Critico');"
-        sqlstatement += "INSERT INTO StatoFamiglia(ID,StatoFamiglia) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO StatoFamiglia(ID,StatoFamiglia) "
         sqlstatement += "VALUES (1, 'Insufficiente');"
-        sqlstatement += "INSERT INTO StatoFamiglia(ID,StatoFamiglia) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO StatoFamiglia(ID,StatoFamiglia) "
         sqlstatement += "VALUES (2, 'Sufficiente');"
-        sqlstatement += "INSERT INTO StatoFamiglia(ID,StatoFamiglia) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO StatoFamiglia(ID,StatoFamiglia) "
         sqlstatement += "VALUES (3, 'Buono');"
-        sqlstatement += "INSERT INTO StatoFamiglia(ID,StatoFamiglia) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO StatoFamiglia(ID,StatoFamiglia) "
         sqlstatement += "VALUES (4, 'Ottimo')"
         db.execute(sqlstatement)
         sqlstatement = "INSERT INTO Razze(ID,Nome) "
         sqlstatement += "VALUES (0, 'Apis Mellifera Ligustica');"
-        sqlstatement += "INSERT INTO Razze(ID,Nome) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO Razze(ID,Nome) "
         sqlstatement += "VALUES (1, 'Apis Mellifera Carnica');"
-        sqlstatement += "INSERT INTO Razze(ID,Nome) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO Razze(ID,Nome) "
         sqlstatement += "VALUES (2, 'Apis Mellifera Sicula')"
         db.execute(sqlstatement)
         sqlstatement = "INSERT INTO Provenienze(ID, Provenienza) "
         sqlstatement += "VALUES (0, 'Sciame Acquistato');"
-        sqlstatement += "INSERT INTO Provenienze(ID, Provenienza) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO Provenienze(ID, Provenienza) "
         sqlstatement += "VALUES (1, 'Sciame Naturale');"
-        sqlstatement += "INSERT INTO Provenienze(ID, Provenienza) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO Provenienze(ID, Provenienza) "
         sqlstatement += "VALUES (2, 'Sciame Naturale');"
-        sqlstatement += "INSERT INTO Provenienze(ID, Provenienza) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO Provenienze(ID, Provenienza) "
         sqlstatement += "VALUES (3, 'Divisione da famiglia')"
         db.execute(sqlstatement)
         sqlstatement = "INSERT INTO TipiArnia(ID, Nome, NTelaini) "
         sqlstatement += "VALUES (0, 'D.B. 6', 6);"
-        sqlstatement += "INSERT INTO TipiArnia(ID, Nome, NTelaini) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO TipiArnia(ID, Nome, NTelaini) "
         sqlstatement += "VALUES (1, 'D.B. 8', 8);"
-        sqlstatement += "INSERT INTO TipiArnia(ID, Nome, NTelaini) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO TipiArnia(ID, Nome, NTelaini) "
         sqlstatement += "VALUES (2, 'D.B. 10', 10);"
-        sqlstatement += "INSERT INTO TipiArnia(ID, Nome, NTelaini) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO TipiArnia(ID, Nome, NTelaini) "
         sqlstatement += "VALUES (3, 'D.B. 12', 12);"
-        sqlstatement += "INSERT INTO TipiArnia(ID, Nome, NTelaini) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO TipiArnia(ID, Nome, NTelaini) "
         sqlstatement += "VALUES (4, 'Polistirolo 6', 6);"
-        sqlstatement += "INSERT INTO TipiArnia(ID, Nome, NTelaini) "
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO TipiArnia(ID, Nome, NTelaini) "
         sqlstatement += "VALUES (5, 'Pigliasciami 6', 6)"
         db.execute(sqlstatement)
         sqlstatement = "INSERT INTO TipiTrattamento("
         sqlstatement += "ID, NomeTrattamento, Descrizione, Posologia) "
         sqlstatement += "VALUES (0, 'Apiguard', 'Timolo in Gel', "
         sqlstatement += "'Due cicli a 15 giorni di distanza');"
-        sqlstatement += "INSERT INTO TipiTrattamento("
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO TipiTrattamento("
         sqlstatement += "ID, NomeTrattamento, Descrizione, Posologia) "
         sqlstatement += "VALUES (1, 'ApiLifeVar', 'Timolo in spugne', "
         sqlstatement += "'Quattro cicli a 7 giorni di distanza');"
-        sqlstatement += "INSERT INTO TipiTrattamento("
+        db.execute(sqlstatement)
+        sqlstatement = "INSERT INTO TipiTrattamento("
         sqlstatement += "ID, NomeTrattamento, Descrizione, Posologia) "
         sqlstatement += "VALUES (2, 'ApiBioxal gocciolato', "
         sqlstatement += "'Acido Ossalico gocciolato', "
@@ -156,6 +177,5 @@ def InizializzaDB(db):
 def TestDatabase(db):
     cur = db.cursor()
     cur.execute("select count(*) from sqlite_master")
-    val = cur.fetchone()
-    if val < 1:
+    if cur.fetchone() < (1,):
         InizializzaDB(db)

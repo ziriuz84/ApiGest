@@ -4,7 +4,7 @@
 from functions import TestDatabase
 from interface import Interfaccia
 import sqlite3 as lite
-import sys
+from sys import exit
 
 con = None
 
@@ -13,7 +13,7 @@ if __name__ == "__main__":
         con = lite.connect('test.db')
     except lite.Error as e:
         print("Error %s: " % e.args[0])
-        sys.exit(1)
+        exit(1)
     TestDatabase(con)
     Interfaccia(con)
     con.close()
