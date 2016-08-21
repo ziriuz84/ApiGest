@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from functions import WIP
+import apiario
 
 
 def MenuApiari(db):
+    Apiario = apiario.Apiario()
     scelta = 5
     while scelta != 0:
         print("Gestione apiari")
@@ -16,13 +18,13 @@ def MenuApiari(db):
         scelta = eval(input("Scelta-> "))
         print("\n\n\n\n")
         if scelta == 1:
-            WIP()
+            Apiario.InterfacciaAggiungi(db)
         if scelta == 2:
             WIP()
         if scelta == 3:
             WIP()
         if scelta == 4:
-            WIP()
+            Apiario.InterfacciaElenca(db)
 
 
 def MenuPrincipale(db):

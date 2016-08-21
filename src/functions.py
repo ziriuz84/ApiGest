@@ -13,7 +13,7 @@ def InizializzaDB(db):
         sqlstatement += "Posologia TEXT NOT NULL)"
         db.execute(sqlstatement)
         sqlstatement = "CREATE TABLE Apiari("
-        sqlstatement += "ID INT PRIMARY KEY NOT NULL, "
+        sqlstatement += "ID INT PRIMARY KEY, "
         sqlstatement += "Nome TEXT NOT NULL, "
         sqlstatement += "Posizione TEXT)"
         db.execute(sqlstatement)
@@ -168,6 +168,7 @@ def InizializzaDB(db):
         sqlstatement += "'Acido Ossalico gocciolato', "
         sqlstatement += "'Due cicli da 5ml a telaino ogni 21 giorni')"
         db.execute(sqlstatement)
+        db.commit()
     except sqlite3.Error as e:
         print("Errore nella scrittura delle query:")
         print(e.args[0])
