@@ -20,9 +20,9 @@ def MenuApiari(db):
         if scelta == 1:
             Apiario.InterfacciaAggiungi(db)
         if scelta == 2:
-            WIP()
+            Apiario.InterfacciaModifica(db)
         if scelta == 3:
-            WIP()
+            Apiario.InterfacciaCancella(db)
         if scelta == 4:
             Apiario.InterfacciaElenca(db)
 

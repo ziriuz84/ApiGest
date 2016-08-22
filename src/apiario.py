@@ -17,10 +17,16 @@ class Apiario:
         db.commit()
 
     def Modifica(self, db):
-        return
+        cur = db.cursor()
+        cur.execute("UPDATE APIARI SET Nome=?, Posizione=? WHERE ID=?;",
+                    (self.Nome, self.Posizione, self.ID))
+        db.commit()
 
-    def Elimina(self):
-        return
+    def Elimina(self, db):
+        cur = db.cursor()
+        cur.execute("DELETE FROM APIARI WHERE ID=?;",
+                    (self.ID, ))
+        db.commit()
 
     def Elenca(self, db):
         cur = db.cursor()
@@ -36,8 +42,8 @@ class Apiario:
         self.Aggiungi(db)
 
     def InterfacciaElenca(self, db):
-        print("Elenca gli apiari")
-        print("=================\n\n")
+        print("Elenco degli apiari")
+        print("===================\n\n")
         valori = self.Elenca(db)
         print("+====+==============+==================================+")
         print("| ID |     Nome     |            Posizione             |")
@@ -45,4 +51,19 @@ class Apiario:
         for val in valori:
             print("|{:>4}|{:>13}|{:>34}|".format(val[0], val[1], val[2]))
         print("+====+==============+==================================+")
-        print("\n\n\n\n")
+
+    def InterfacciaModifica(self, db):
+        print("Modifica Apiario")
+        print("================\n\n")
+        self.InterfacciaElenca(db)
+        self.ID = eval(input("ID apiario da modificare -> "))
+        self.Nome = input("Nome -> ")
+        self.Posizione = input("Posizione -> ")
+        self.Modifica(db)
+
+    def InterfacciaCancella(self, db):
+        print("Cancella Apiario")
+        print("================")
+        self.InterfacciaElenca(db)
+        self.ID = eval(input("ID Apiario da cancellare"))
+        self.Elimina(db)
