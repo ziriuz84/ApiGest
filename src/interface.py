@@ -2,6 +2,7 @@
 
 from functions import WIP
 import apiario
+import alveare
 
 
 def MenuApiari(db):
@@ -27,6 +28,29 @@ def MenuApiari(db):
             Apiario.InterfacciaElenca(db)
 
 
+def MenuAlveari(db):
+    Alveare = alveare.Alveare()
+    scelta = 5
+    while scelta != 0:
+        print("Gestione alveari")
+        print("========================\n\n")
+        print("1 - Aggiungi Alveare")
+        print("2 - Modifica Alveare")
+        print("3 - Cancella Alveare")
+        print("4 - Elenca Alveari")
+        print("0 - Torna Indietro")
+        scelta = eval(input("Scelta-> "))
+        print("\n\n\n\n")
+        if scelta == 1:
+            Alveare.InterfacciaAggiungi(db)
+        if scelta == 2:
+            WIP()
+        if scelta == 3:
+            WIP()
+        if scelta == 4:
+            WIP()
+
+
 def MenuPrincipale(db):
     scelta = 5
     while (scelta != 0):
@@ -34,11 +58,14 @@ def MenuPrincipale(db):
         print("========================")
         print("\n")
         print("1 - Gestione Apiari")
+        print("2 - Gestione Alveari")
         print("0 - Esci")
         scelta = eval(input("scelta-> "))
         print("\n\n\n\n")
         if scelta == 1:
             MenuApiari(db)
+        if scelta == 2:
+            MenuAlveari(db)
 
 
 def Interfaccia(db):
