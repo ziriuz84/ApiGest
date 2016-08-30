@@ -6,6 +6,15 @@ import alveare
 
 
 def MenuApiari(db):
+    """
+    Funzione di gestione degli apiari
+
+    Stampa il menu della gestione apiari e chiama il metodo relativo
+    all'opzione scelta
+
+    Args:
+        db: il database su cui lavorare
+    """
     Apiario = apiario.Apiario()
     scelta = 5
     while scelta != 0:
@@ -29,6 +38,15 @@ def MenuApiari(db):
 
 
 def MenuAlveari(db):
+    """
+    Funzione di gestione degli alveari
+
+    Stampa il menu della gestione alveari e chiama il metodo relativo
+    all'opzione scelta
+
+    Args:
+        db: il database su cui lavorare
+    """
     Alveare = alveare.Alveare()
     scelta = 5
     while scelta != 0:
@@ -52,6 +70,14 @@ def MenuAlveari(db):
 
 
 def MenuPrincipale(db):
+    """
+    Funzione del menu principale
+
+    Stampa il menu principale e chiama la funziona relativa all'opzione scelta
+
+    Args:
+        db: il database su cui lavorare
+    """
     scelta = 5
     while (scelta != 0):
         print("Benvenuto in Apigest 0.1")
@@ -69,4 +95,12 @@ def MenuPrincipale(db):
 
 
 def Interfaccia(db):
+    """
+    Funzione dell'interfaccia testuale
+
+    Richiama il menu principale dell'interfaccia testuale
+
+    Args:
+        db: il database su cui lavorare
+    """
     MenuPrincipale(db)
