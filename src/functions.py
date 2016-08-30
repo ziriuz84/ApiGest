@@ -5,6 +5,14 @@ import sys
 
 
 def InizializzaDB(db):
+    """
+    Funzione di inizializzazione del database
+
+    Inizializza il database con le relative tabelle e valori iniziali
+
+    Args:
+        db: il database con cui lavorare
+    """
     try:
         sqlstatement = "CREATE TABLE TipiTrattamento("
         sqlstatement += "ID INT PRIMARY KEY NOT NULL,"
@@ -178,6 +186,15 @@ def InizializzaDB(db):
 
 
 def TestDatabase(db):
+    """
+    Funzione di test del database
+
+    Effettua un conteggio sul numero di tabelle nel database. Se è minore di 1,
+    e quindi non ci sono tabelle, richiama la funzione InizializzaDB
+
+    Args:
+        db: il database con cui lavorare
+    """
     cur = db.cursor()
     cur.execute("select count(*) from sqlite_master")
     if cur.fetchone() < (1,):
@@ -185,4 +202,10 @@ def TestDatabase(db):
 
 
 def WIP():
+    """
+    Funzione Work in progress
+
+    Da richiamare quando una sezione è ancora da completare. Stampa
+    semplicemente a schermo la frase "Work in Progress"
+    """
     print("Work in Progress")
