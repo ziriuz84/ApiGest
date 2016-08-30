@@ -18,6 +18,14 @@ class Alveare:
         self.Posizione = 0
 
     def Aggiungi(self, db):
+        """
+        Funzione di aggiunta di alveari
+
+        Prende l'oggetto Alveare e lo inserisce nel database
+
+        Args:
+            db: l'oggetto database
+        """
         cur = db.cursor()
         cur.execute("SELECT COUNT(*) FROM ALVEARI;")
         LastID = cur.fetchone()
@@ -41,6 +49,14 @@ class Alveare:
         return
 
     def InterfacciaAggiungi(self, db):
+        """
+        Funzione di interfaccia per l'aggiunta di alveari
+
+        Funge da interfaccia per l'inserimento dei dati del nuovo alveare
+
+        Args:
+            db: il database su cui si lavora
+        """
         cur = db.cursor()
         print("Aggiunta di un Alveare")
         print("======================\n\n")
