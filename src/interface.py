@@ -66,7 +66,7 @@ def MenuAlveari(db):
         if scelta == 3:
             WIP()
         if scelta == 4:
-            WIP()
+            Alveare.InterfacciaElenca(db)
 
 
 def MenuPrincipale(db):

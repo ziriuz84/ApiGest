@@ -45,8 +45,23 @@ class Alveare:
     def Elimina(self):
         return
 
-    def Elenca(self):
-        return
+    def Elenca(self, db):
+        """
+        Funzione di elenco degli alveari
+
+        Fa una query sul database per trovare tutti gli alverari e ritorna una
+        tupla di tutti i risultati
+
+        Args:
+            db: il database su cui lavorare
+
+        Returns:
+            una tupla con tutti i valori trovati
+        """
+        cur = db.cursor()
+        cur.execute("SELECT * FROM ALVEARI;")
+        valori = cur.fetchall()
+        return valori
 
     def InterfacciaAggiungi(self, db):
         """
@@ -115,3 +130,22 @@ class Alveare:
         self.StatoFamiglia = input("ID Stato Famiglia -> ")
         self.Posizione = input("Posizione -> ")
         self.Aggiungi(db)
+
+    def InterfacciaElenca(self, db):
+        """
+        Interfaccia di elenco alveari
+
+        Fornisce un'interfaccia alla funzione di elenco degli alveari
+
+        Args:
+            db: il database su cui lavorare
+        """
+        print("Elenco Alveari")
+        print("==============\n\n")
+        print("+====+================+===============+")
+        print("| ID |      Nome      |    Apiario    |")
+        print("+====+================+===============+")
+        valori = self.Elenca(db)
+        for val in valori:
+            print("|{:>4}|{:>16}|{:>15}|".format(val[0], val[1], val[2]))
+        print("+====+================+===============+")
