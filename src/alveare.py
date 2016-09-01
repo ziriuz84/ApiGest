@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 import datetime
 
+# TODO necessaria una funzione di ricerca degli alveari?
+# TODO Aggiungere interfaccia per l'eliminazione degli alveari
+# TODO Aggiungere interfaccia per la modifica degli alveari
+
 
 class Alveare:
     def __init__(self):
@@ -40,9 +44,11 @@ class Alveare:
         db.commit()
 
     def Modifica(self):
+        # TODO implementare funzione di modifica degli alveari
         return
 
     def Elimina(self):
+        # TODO implementare funzione di eliminazione degli alveari
         return
 
     def Elenca(self, db):
