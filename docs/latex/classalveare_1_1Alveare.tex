@@ -11,14 +11,17 @@ def \hyperlink{classalveare_1_1Alveare_ab96add517787f0990d1a31229b84023e}{Aggiun
 def {\bfseries Modifica} (self)\hypertarget{classalveare_1_1Alveare_a7ea9f3467476139259dc47d40018c9e2}{}\label{classalveare_1_1Alveare_a7ea9f3467476139259dc47d40018c9e2}
 
 \item 
-def {\bfseries Elimina} (self)\hypertarget{classalveare_1_1Alveare_a8ed154d75e12163c8ba2ad6432f3813c}{}\label{classalveare_1_1Alveare_a8ed154d75e12163c8ba2ad6432f3813c}
-
+def \hyperlink{classalveare_1_1Alveare_a9ced552f759d330ebe2001cc90651763}{Elimina} (self, db)
 \item 
 def \hyperlink{classalveare_1_1Alveare_ae7441be09d9bf0d8c2248a24534b1285}{Elenca} (self, db)
+\item 
+def \hyperlink{classalveare_1_1Alveare_a94c2d472ef129a78f48584b146c25ad9}{Elenca\+Per\+Apiario} (self, db)
 \item 
 def \hyperlink{classalveare_1_1Alveare_abf2c97ac838ed0af2326ee4cd4742820}{Interfaccia\+Aggiungi} (self, db)
 \item 
 def \hyperlink{classalveare_1_1Alveare_aabdd9656e20b585b82c7228ac2333abf}{Interfaccia\+Elenca} (self, db)
+\item 
+def \hyperlink{classalveare_1_1Alveare_a6ec7088fcbc0c793b13393312214d606}{Interfaccia\+Elenca\+Per\+Apiario} (self, db)
 \end{DoxyCompactItemize}
 \subsection*{Attributi pubblici}
 \begin{DoxyCompactItemize}
@@ -96,6 +99,36 @@ Args:
 Returns:
     una tupla con tutti i valori trovati
 \end{DoxyVerb}
+ \index{alveare\+::\+Alveare@{alveare\+::\+Alveare}!Elenca\+Per\+Apiario@{Elenca\+Per\+Apiario}}
+\index{Elenca\+Per\+Apiario@{Elenca\+Per\+Apiario}!alveare\+::\+Alveare@{alveare\+::\+Alveare}}
+\subsubsection[{\texorpdfstring{Elenca\+Per\+Apiario(self, db)}{ElencaPerApiario(self, db)}}]{\setlength{\rightskip}{0pt plus 5cm}def alveare.\+Alveare.\+Elenca\+Per\+Apiario (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{db}
+\end{DoxyParamCaption}
+)}\hypertarget{classalveare_1_1Alveare_a94c2d472ef129a78f48584b146c25ad9}{}\label{classalveare_1_1Alveare_a94c2d472ef129a78f48584b146c25ad9}
+\begin{DoxyVerb}Funzione di elenco per apiario
+
+Recupera gli alveari che appartengono ad un dato apiario
+
+Args:
+    db: il database su cui lavorare
+\end{DoxyVerb}
+ \index{alveare\+::\+Alveare@{alveare\+::\+Alveare}!Elimina@{Elimina}}
+\index{Elimina@{Elimina}!alveare\+::\+Alveare@{alveare\+::\+Alveare}}
+\subsubsection[{\texorpdfstring{Elimina(self, db)}{Elimina(self, db)}}]{\setlength{\rightskip}{0pt plus 5cm}def alveare.\+Alveare.\+Elimina (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{db}
+\end{DoxyParamCaption}
+)}\hypertarget{classalveare_1_1Alveare_a9ced552f759d330ebe2001cc90651763}{}\label{classalveare_1_1Alveare_a9ced552f759d330ebe2001cc90651763}
+\begin{DoxyVerb}Funzione di eliminazione degli alveari
+
+Elimina un alveare a partire dall'ID nel database
+
+Args:
+    db: il database su cui lavorare
+\end{DoxyVerb}
  \index{alveare\+::\+Alveare@{alveare\+::\+Alveare}!Interfaccia\+Aggiungi@{Interfaccia\+Aggiungi}}
 \index{Interfaccia\+Aggiungi@{Interfaccia\+Aggiungi}!alveare\+::\+Alveare@{alveare\+::\+Alveare}}
 \subsubsection[{\texorpdfstring{Interfaccia\+Aggiungi(self, db)}{InterfacciaAggiungi(self, db)}}]{\setlength{\rightskip}{0pt plus 5cm}def alveare.\+Alveare.\+Interfaccia\+Aggiungi (
@@ -119,6 +152,21 @@ Args:
 \item[{}]{db}
 \end{DoxyParamCaption}
 )}\hypertarget{classalveare_1_1Alveare_aabdd9656e20b585b82c7228ac2333abf}{}\label{classalveare_1_1Alveare_aabdd9656e20b585b82c7228ac2333abf}
+\begin{DoxyVerb}Interfaccia di elenco alveari
+
+Fornisce un'interfaccia alla funzione di elenco degli alveari
+
+Args:
+    db: il database su cui lavorare
+\end{DoxyVerb}
+ \index{alveare\+::\+Alveare@{alveare\+::\+Alveare}!Interfaccia\+Elenca\+Per\+Apiario@{Interfaccia\+Elenca\+Per\+Apiario}}
+\index{Interfaccia\+Elenca\+Per\+Apiario@{Interfaccia\+Elenca\+Per\+Apiario}!alveare\+::\+Alveare@{alveare\+::\+Alveare}}
+\subsubsection[{\texorpdfstring{Interfaccia\+Elenca\+Per\+Apiario(self, db)}{InterfacciaElencaPerApiario(self, db)}}]{\setlength{\rightskip}{0pt plus 5cm}def alveare.\+Alveare.\+Interfaccia\+Elenca\+Per\+Apiario (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{db}
+\end{DoxyParamCaption}
+)}\hypertarget{classalveare_1_1Alveare_a6ec7088fcbc0c793b13393312214d606}{}\label{classalveare_1_1Alveare_a6ec7088fcbc0c793b13393312214d606}
 \begin{DoxyVerb}Interfaccia di elenco alveari
 
 Fornisce un'interfaccia alla funzione di elenco degli alveari
