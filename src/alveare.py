@@ -47,9 +47,18 @@ class Alveare:
         # TODO implementare funzione di modifica degli alveari
         return
 
-    def Elimina(self):
+    def Elimina(self, db):
+        """
+        Funzione di eliminazione degli alveari
+
+        Elimina un alveare a partire dall'ID nel database
+
+        Args:
+            db: il database su cui lavorare
+        """
+        cur = db.cursor()
+        cur.execute("DELETE FROM ALVEARI WHERE ID=?;", (self.ID, ))
         # TODO implementare funzione di eliminazione degli alveari
-        return
 
     def Elenca(self, db):
         """
