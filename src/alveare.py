@@ -175,6 +175,9 @@ class Alveare:
         print("+====+================+===============+")
         print("| ID |      Nome      |    Apiario    |")
         print("+====+================+===============+")
+        # TODO Mettere nome apiario nella tabella e non ID
+        # Il metodo elenca di Apiario ritorna una lista di tuple. bisognerebbe
+        # cercare tra quelle quella con l'id necessario
         valori = self.Elenca(db)
         for val in valori:
             print("|{:>4}|{:>16}|{:>15}|".format(val[0], val[1], val[2]))
@@ -194,10 +197,10 @@ class Alveare:
         Apiario = apiario.Apiario()
         Apiario.InterfacciaElenca(db)
         self.Apiario = eval(input("Seleziona un apiario -> "))
-        print("+====+================+===============+")
-        print("| ID |      Nome      |    Alveare    |")
-        print("+====+================+===============+")
+        print("+====+================+")
+        print("| ID |      Nome      |")
+        print("+====+================+")
         valori = self.ElencaPerApiario(db)
         for val in valori:
-            print("|{:>4}|{:>16}|{:>15}|".format(val[0], val[1], val[2]))
+            print("|{:>4}|{:>16}|".format(val[0], val[1]))
         print("+====+================+===============+")
