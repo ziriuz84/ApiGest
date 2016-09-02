@@ -158,7 +158,7 @@ class Alveare:
         print("Elenco Alveari")
         print("==============\n\n")
         print("+====+================+===============+")
-        print("| ID |      Nome      |    Apiario    |")
+        print("| ID |      Nome      |    Alveare    |")
         print("+====+================+===============+")
         valori = self.Elenca(db)
         for val in valori:
