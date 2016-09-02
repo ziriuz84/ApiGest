@@ -6,6 +6,7 @@ import alveare
 
 # TODO Aggiungere menu gestione visite
 
+
 def MenuApiari(db):
     """
     Funzione di gestione degli apiari
@@ -57,17 +58,20 @@ def MenuAlveari(db):
         print("2 - Modifica Alveare")
         print("3 - Cancella Alveare")
         print("4 - Elenca Alveari")
+        print("5 - Elenca Alveari di uno specifico Apiario")
         print("0 - Torna Indietro")
         scelta = eval(input("Scelta-> "))
         print("\n\n\n\n")
         if scelta == 1:
             Alveare.InterfacciaAggiungi(db)
         if scelta == 2:
-            WIP() # TODO Aggiungere funzione di modifica
+            WIP()  # TODO Aggiungere funzione di modifica
         if scelta == 3:
-            WIP() # TODO Aggiungere funzione di eliminazione
+            WIP()  # TODO Aggiungere funzione di eliminazione
         if scelta == 4:
             Alveare.InterfacciaElenca(db)
+        if scelta == 5:
+            Alveare.InterfacciaElencaPerApiario(db)
 
 
 def MenuPrincipale(db):

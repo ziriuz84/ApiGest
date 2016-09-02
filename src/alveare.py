@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+import apiario
 
 # TODO necessaria una funzione di ricerca degli alveari?
 # TODO Aggiungere interfaccia per l'eliminazione degli alveari
@@ -75,6 +76,20 @@ class Alveare:
         """
         cur = db.cursor()
         cur.execute("SELECT * FROM ALVEARI;")
+        valori = cur.fetchall()
+        return valori
+
+    def ElencaPerApiario(self, db):
+        """
+        Funzione di elenco per apiario
+
+        Recupera gli alveari che appartengono ad un dato apiario
+
+        Args:
+            db: il database su cui lavorare
+        """
+        cur = db.cursor()
+        cur.execute("SELECT * FROM ALVEARI WHERE Apiario=?;", (self.Apiario, ))
         valori = cur.fetchall()
         return valori
 
@@ -158,9 +173,31 @@ class Alveare:
         print("Elenco Alveari")
         print("==============\n\n")
         print("+====+================+===============+")
-        print("| ID |      Nome      |    Alveare    |")
+        print("| ID |      Nome      |    Apiario    |")
         print("+====+================+===============+")
         valori = self.Elenca(db)
+        for val in valori:
+            print("|{:>4}|{:>16}|{:>15}|".format(val[0], val[1], val[2]))
+        print("+====+================+===============+")
+
+    def InterfacciaElencaPerApiario(self, db):
+        """
+        Interfaccia di elenco alveari
+
+        Fornisce un'interfaccia alla funzione di elenco degli alveari
+
+        Args:
+            db: il database su cui lavorare
+        """
+        print("Elenco Alveari")
+        print("==============\n\n")
+        Apiario = apiario.Apiario()
+        Apiario.InterfacciaElenca(db)
+        self.Apiario = eval(input("Seleziona un apiario -> "))
+        print("+====+================+===============+")
+        print("| ID |      Nome      |    Alveare    |")
+        print("+====+================+===============+")
+        valori = self.ElencaPerApiario(db)
         for val in valori:
             print("|{:>4}|{:>16}|{:>15}|".format(val[0], val[1], val[2]))
         print("+====+================+===============+")
