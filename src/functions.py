@@ -13,6 +13,7 @@ def InizializzaDB(db):
     Args:
         db: il database con cui lavorare
     """
+    # TODO Aggiungere creazione tabella visite
     try:
         sqlstatement = "CREATE TABLE TipiTrattamento("
         sqlstatement += "ID INT PRIMARY KEY NOT NULL,"

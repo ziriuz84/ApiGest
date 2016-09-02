@@ -4,6 +4,7 @@ from functions import WIP
 import apiario
 import alveare
 
+# TODO Aggiungere menu gestione visite
 
 def MenuApiari(db):
     """
@@ -62,9 +63,9 @@ def MenuAlveari(db):
         if scelta == 1:
             Alveare.InterfacciaAggiungi(db)
         if scelta == 2:
-            WIP()
+            WIP() # TODO Aggiungere funzione di modifica
         if scelta == 3:
-            WIP()
+            WIP() # TODO Aggiungere funzione di eliminazione
         if scelta == 4:
             Alveare.InterfacciaElenca(db)
 
