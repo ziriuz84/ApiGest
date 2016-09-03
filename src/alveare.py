@@ -59,7 +59,7 @@ class Alveare:
         """
         cur = db.cursor()
         cur.execute("DELETE FROM ALVEARI WHERE ID=?;", (self.ID, ))
-        # TODO implementare funzione di eliminazione degli alveari
+        db.commit()
 
     def Elenca(self, db):
         """
@@ -185,9 +185,10 @@ class Alveare:
 
     def InterfacciaElencaPerApiario(self, db):
         """
-        Interfaccia di elenco alveari
+        Interfaccia di elenco alveari di un apiario
 
-        Fornisce un'interfaccia alla funzione di elenco degli alveari
+        Fornisce un'interfaccia alla funzione di elenco degli alveari di un
+        solo apiario
 
         Args:
             db: il database su cui lavorare
@@ -204,3 +205,16 @@ class Alveare:
         for val in valori:
             print("|{:>4}|{:>16}|".format(val[0], val[1]))
         print("+====+================+===============+")
+
+    def InterfacciaElimina(self, db):
+        """
+        Interfaccia di eliminazione degli alveari
+
+        Fornisce l'interfaccia per eliminare un alveare
+
+        Args:
+            db: il database su cui lavorare
+        """
+        self.InterfacciaElencaPerApiario(db)
+        self.ID = eval(input("ID alveare da eliminare -> "))
+        self.Elimina(db)
