@@ -175,9 +175,6 @@ class Alveare:
         print("+====+================+===============+")
         print("| ID |      Nome      |    Apiario    |")
         print("+====+================+===============+")
-        # TODO Mettere nome apiario nella tabella e non ID
-        # Il metodo elenca di Apiario ritorna una lista di tuple. bisognerebbe
-        # cercare tra quelle quella con l'id necessario
         valori = self.Elenca(db)
         Apiario = apiario.Apiario()
         for val in valori:
