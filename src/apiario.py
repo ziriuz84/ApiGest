@@ -137,3 +137,9 @@ class Apiario:
         self.InterfacciaElenca(db)
         self.ID = eval(input("ID Apiario da cancellare"))
         self.Elimina(db)
+
+    def RecuperaNome(self, db, ID):
+        self.ID = ID
+        cur = db.cursor()
+        cur.execute("SELECT Nome FROM APIARI WHERE ID=?", (self.ID, ))
+        return cur.fetchone()

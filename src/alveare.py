@@ -179,8 +179,10 @@ class Alveare:
         # Il metodo elenca di Apiario ritorna una lista di tuple. bisognerebbe
         # cercare tra quelle quella con l'id necessario
         valori = self.Elenca(db)
+        Apiario = apiario.Apiario()
         for val in valori:
-            print("|{:>4}|{:>16}|{:>15}|".format(val[0], val[1], val[2]))
+            nome = Apiario.RecuperaNome(db, val[2])
+            print("|{:>4}|{:>16}|{:>15}|".format(val[0], val[1], nome[0]))
         print("+====+================+===============+")
 
     def InterfacciaElencaPerApiario(self, db):
