@@ -65,10 +65,9 @@ def MenuAlveari(db):
         if scelta == 1:
             Alveare.InterfacciaAggiungi(db)
         if scelta == 2:
-            WIP()  # TODO Aggiungere funzione di modifica
+            Alveare.InterfacciaModifica(db)
         if scelta == 3:
             Alveare.InterfacciaElimina(db)
-            WIP()  # TODO Aggiungere funzione di eliminazione
         if scelta == 4:
             Alveare.InterfacciaElenca(db)
         if scelta == 5:
