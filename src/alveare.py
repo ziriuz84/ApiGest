@@ -3,7 +3,6 @@ import datetime
 import apiario
 
 # TODO necessaria una funzione di ricerca degli alveari?
-# TODO Aggiungere interfaccia per la modifica degli alveari
 
 
 class Alveare:

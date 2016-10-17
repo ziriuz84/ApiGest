@@ -8,14 +8,15 @@ def {\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self)\hypertarget{classalveare_1_1
 \item 
 def \hyperlink{classalveare_1_1Alveare_ab96add517787f0990d1a31229b84023e}{Aggiungi} (self, db)
 \item 
-def {\bfseries Modifica} (self)\hypertarget{classalveare_1_1Alveare_a7ea9f3467476139259dc47d40018c9e2}{}\label{classalveare_1_1Alveare_a7ea9f3467476139259dc47d40018c9e2}
-
+def \hyperlink{classalveare_1_1Alveare_aba890e70322f90209af9b1e8a25fb5c5}{Modifica} (self, db)
 \item 
 def \hyperlink{classalveare_1_1Alveare_a9ced552f759d330ebe2001cc90651763}{Elimina} (self, db)
 \item 
 def \hyperlink{classalveare_1_1Alveare_ae7441be09d9bf0d8c2248a24534b1285}{Elenca} (self, db)
 \item 
 def \hyperlink{classalveare_1_1Alveare_a94c2d472ef129a78f48584b146c25ad9}{Elenca\+Per\+Apiario} (self, db)
+\item 
+def \hyperlink{classalveare_1_1Alveare_a0f3bb1ea1a2356f64130a24a758db15c}{Seleziona\+Alveare} (self, db)
 \item 
 def \hyperlink{classalveare_1_1Alveare_abf2c97ac838ed0af2326ee4cd4742820}{Interfaccia\+Aggiungi} (self, db)
 \item 
@@ -24,6 +25,8 @@ def \hyperlink{classalveare_1_1Alveare_aabdd9656e20b585b82c7228ac2333abf}{Interf
 def \hyperlink{classalveare_1_1Alveare_a6ec7088fcbc0c793b13393312214d606}{Interfaccia\+Elenca\+Per\+Apiario} (self, db)
 \item 
 def \hyperlink{classalveare_1_1Alveare_ab6258c6e80bfb867da2ea5174b8da49f}{Interfaccia\+Elimina} (self, db)
+\item 
+def \hyperlink{classalveare_1_1Alveare_ae2c17e8699eb4d8d39825159a8b7ddff}{Interfaccia\+Modifica} (self, db)
 \end{DoxyCompactItemize}
 \subsection*{Attributi pubblici}
 \begin{DoxyCompactItemize}
@@ -188,6 +191,51 @@ Args:
 \begin{DoxyVerb}Interfaccia di eliminazione degli alveari
 
 Fornisce l'interfaccia per eliminare un alveare
+
+Args:
+    db: il database su cui lavorare
+\end{DoxyVerb}
+ \index{alveare\+::\+Alveare@{alveare\+::\+Alveare}!Interfaccia\+Modifica@{Interfaccia\+Modifica}}
+\index{Interfaccia\+Modifica@{Interfaccia\+Modifica}!alveare\+::\+Alveare@{alveare\+::\+Alveare}}
+\subsubsection[{\texorpdfstring{Interfaccia\+Modifica(self, db)}{InterfacciaModifica(self, db)}}]{\setlength{\rightskip}{0pt plus 5cm}def alveare.\+Alveare.\+Interfaccia\+Modifica (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{db}
+\end{DoxyParamCaption}
+)}\hypertarget{classalveare_1_1Alveare_ae2c17e8699eb4d8d39825159a8b7ddff}{}\label{classalveare_1_1Alveare_ae2c17e8699eb4d8d39825159a8b7ddff}
+\begin{DoxyVerb}Interfaccia di modifica degli alveari
+
+Fornisce l'interfaccia per modificare un alveare
+
+Args:
+    db: il database su cui lavorare
+\end{DoxyVerb}
+ \index{alveare\+::\+Alveare@{alveare\+::\+Alveare}!Modifica@{Modifica}}
+\index{Modifica@{Modifica}!alveare\+::\+Alveare@{alveare\+::\+Alveare}}
+\subsubsection[{\texorpdfstring{Modifica(self, db)}{Modifica(self, db)}}]{\setlength{\rightskip}{0pt plus 5cm}def alveare.\+Alveare.\+Modifica (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{db}
+\end{DoxyParamCaption}
+)}\hypertarget{classalveare_1_1Alveare_aba890e70322f90209af9b1e8a25fb5c5}{}\label{classalveare_1_1Alveare_aba890e70322f90209af9b1e8a25fb5c5}
+\begin{DoxyVerb}Funzione di modifica degli alveari
+
+Modifica un alveare a partire dall'ID nel database
+
+Args:
+    db: il database su cui lavorare
+\end{DoxyVerb}
+ \index{alveare\+::\+Alveare@{alveare\+::\+Alveare}!Seleziona\+Alveare@{Seleziona\+Alveare}}
+\index{Seleziona\+Alveare@{Seleziona\+Alveare}!alveare\+::\+Alveare@{alveare\+::\+Alveare}}
+\subsubsection[{\texorpdfstring{Seleziona\+Alveare(self, db)}{SelezionaAlveare(self, db)}}]{\setlength{\rightskip}{0pt plus 5cm}def alveare.\+Alveare.\+Seleziona\+Alveare (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{db}
+\end{DoxyParamCaption}
+)}\hypertarget{classalveare_1_1Alveare_a0f3bb1ea1a2356f64130a24a758db15c}{}\label{classalveare_1_1Alveare_a0f3bb1ea1a2356f64130a24a758db15c}
+\begin{DoxyVerb}Funzione di selezione di un alveare
+
+Recupera i valori di un alveare e ne salva gli attributi
 
 Args:
     db: il database su cui lavorare
