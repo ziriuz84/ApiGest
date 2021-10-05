@@ -6,6 +6,8 @@ from interface import Interfaccia
 import sqlite3 as lite
 from sys import exit
 
+# TODO Aggiungere supporto al file di configurazione
+
 con = None
 
 if __name__ == "__main__":
